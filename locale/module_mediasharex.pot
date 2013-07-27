@@ -1,0 +1,222 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula component\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-04 20:45-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 
+msgid "Mediasharex"
+msgstr ""
+
+#: 
+msgid "mediasharex"
+msgstr ""
+
+#: 
+msgid "Group"
+msgstr ""
+
+#: 
+msgid "group"
+msgstr ""
+
+#: 
+msgid "My groups"
+msgstr ""
+
+#: 
+msgid "Add group"
+msgstr ""
+
+#: 
+msgid "Edit group"
+msgstr ""
+
+#: 
+msgid "Save"
+msgstr ""
+
+#: 
+msgid "Update"
+msgstr ""
+
+#: 
+msgid "Cancel"
+msgstr ""
+
+#: 
+msgid "Modified"
+msgstr ""
+
+#: 
+msgid "By"
+msgstr ""
+
+#: 
+msgid "Options"
+msgstr ""
+
+#: 
+msgid "Edit"
+msgstr ""
+
+#: 
+msgid "Editor settings"
+msgstr ""
+
+#: 
+msgid "Creator"
+msgstr ""
+
+#: 
+msgid "Cr date"
+msgstr ""
+
+#: 
+msgid "Publish date"
+msgstr ""
+
+#: 
+msgid "Expire date"
+msgstr ""
+
+#: 
+msgid "Show in List"
+msgstr ""
+
+#: 
+msgid "Show in Menu"
+msgstr ""
+
+#: 
+msgid "Views"
+msgstr ""
+
+#: 
+msgid "Author"
+msgstr ""
+
+#: 
+msgid "Search"
+msgstr ""
+
+#: 
+msgid "Name, content, category, range and images"
+msgstr ""
+
+#: 
+msgid "Title"
+msgstr ""
+
+#: 
+msgid "Title is missing"
+msgstr ""
+
+#: 
+msgid "Category"
+msgstr ""
+
+#: 
+msgid "Category is missing"
+msgstr ""
+
+#: 
+msgid "Categories"
+msgstr ""
+
+#: 
+msgid "Chose apropriate category"
+msgstr ""
+
+#: 
+msgid "Content"
+msgstr ""
+
+#: 
+msgid "Content is missing"
+msgstr ""
+
+#: 
+msgid "Public groups"
+msgstr ""
+
+#: 
+msgid "public groups"
+msgstr ""
+
+#: 
+msgid "Registered users"
+msgstr ""
+
+#: 
+msgid "registered users"
+msgstr ""
+
+#: 
+msgid "Watchers"
+msgstr ""
+
+#: 
+msgid "Online users"
+msgstr ""
+
+#: 
+msgid "New groups"
+msgstr ""
+
+#: 
+msgid "Popular groups"
+msgstr ""
+
+#: 
+msgid "Mediasharex manager"
+msgstr ""
+
+#: 
+msgid "Mediasharex home page"
+msgstr ""
+
+#: 
+msgid "Published"
+msgstr ""
+
+#: 
+msgid "Here you can select up to 3 images"
+msgstr ""
+
+#: 
+msgid "You have"
+msgstr ""
+
+#: 
+msgid "images"
+msgstr ""
+
+#: 
+msgid "Only 3 images allowed"
+msgstr ""
+
+#: 
+msgid "Unknow image"
+msgstr ""
+
+#: 
+msgid "Images"
+msgstr ""
+
+#: 
+msgid "Delete image"
+msgstr ""
+

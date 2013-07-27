@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula component\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-04 20:45-0300\n"
+"PO-Revision-Date: 2013-07-05 00:02+0100\n"
+"Last-Translator: Karol Kijak <kapitanogor@googlemail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Mediasharex"
+msgstr "Społeczność"
+
+msgid "mediasharex"
+msgstr "społeczność"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "group"
+msgstr "grupa"
+
+msgid "My groups"
+msgstr "Moje grupy"
+
+msgid "Add group"
+msgstr "Dodaj grupę"
+
+msgid "Edit group"
+msgstr "Edytuj grupe"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Modified"
+msgstr "Zmodyfikowane"
+
+msgid "By"
+msgstr "Przez"
+
+msgid "Options"
+msgstr "Opcje"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "Editor settings"
+msgstr "Ustawienia edytorskie"
+
+msgid "Creator"
+msgstr "Twórca"
+
+msgid "Cr date"
+msgstr "Data stworzenia"
+
+msgid "Publish date"
+msgstr "Data publikacji"
+
+msgid "Expire date"
+msgstr "Data wygaśnięcia"
+
+msgid "Show in List"
+msgstr "Pokaż na liście"
+
+msgid "Show in Menu"
+msgstr "Pokaż w menu"
+
+msgid "Views"
+msgstr "Wyświetleń"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Name, content, category, range and images"
+msgstr "Nazwa, opis, kategoria oraz logo"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Title is missing"
+msgstr "Proszę wpisać tytuł ogłoszenia"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Category is missing"
+msgstr "Proszę wybrać odpowiednią kategorię"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "Chose apropriate category"
+msgstr "Wybierz odpowiednią kategorię"
+
+msgid "Content"
+msgstr "Treść"
+
+msgid "Content is missing"
+msgstr "Proszę wpisać treść ogłoszenia"
+
+msgid "Public groups"
+msgstr "Grupy publiczne"
+
+msgid "public groups"
+msgstr "grupy publiczne"
+
+msgid "Registered users"
+msgstr "Zarejstrowanych użytkowników"
+
+msgid "registered users"
+msgstr "zarejestrowanych użytkowników"
+
+msgid "Watchers"
+msgstr "Gości"
+
+msgid "Online users"
+msgstr "Zalogowani"
+
+msgid "New groups"
+msgstr "Nowe grupy"
+
+msgid "Popular groups"
+msgstr "Popularne grupy"
+
+msgid "Mediasharex manager"
+msgstr "Menedrzer grup"
+
+msgid "Mediasharex home page"
+msgstr "Strona główna ogłoszeń"
+
+msgid "Published"
+msgstr "Opublikowane"
+
+msgid "Here you can select up to 3 images"
+msgstr "Tutaj możesz dodać 3 zdjęcia do swojego ogłoszenia"
+
+msgid "You have"
+msgstr "Masz"
+
+msgid "images"
+msgstr "zdjęcia"
+
+msgid "Only 3 images allowed"
+msgstr "Maksymalnie 3 zdjęcia"
+
+msgid "Unknow image"
+msgstr "Nieznany obraz"
+
+msgid "Images"
+msgstr "Zdjęć"
+
+msgid "Delete image"
+msgstr "Usuń zdjęcie"
+
+#~ msgid "Range"
+#~ msgstr "Zasięg"
+
+#~ msgid "Range is missing"
+#~ msgstr "Proszę wybrać zasięg ogłoszenia"
+
+#~ msgid "Chose apropriate range"
+#~ msgstr "Wybierz odpowiedni zasięg"
+
+#~ msgid "Price"
+#~ msgstr "Cena"
+
+#~ msgid "Contact name"
+#~ msgstr "Osoba kontaktowa"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon"
+
+#~ msgid "Email"
+#~ msgstr "Adress email"
+
+#~ msgid "Contact informations"
+#~ msgstr "Informacje kontaktowe"
+
+#~ msgid "Promoted mediasharex"
+#~ msgstr "Najnowsze grupy"
+
+#~ msgid "Normal mediasharex"
+#~ msgstr "Top grupy"
+
+#~ msgid "This user add also"
+#~ msgstr "Inne ogłoszenia tego użytkownika"
+
+#~ msgid "Classified"
+#~ msgstr "Ogłoszenie"
+
+#~ msgid "classified"
+#~ msgstr "ogłoszenie"
+
+#~ msgid "add"
+#~ msgstr "dodaj nowe"
+
+#~ msgid "My mediasharex"
+#~ msgstr "Moje ogłoszenia"
+
+#~ msgid "Add classified"
+#~ msgstr "Dodaj ogłoszenie"
+
+#~ msgid "Modify classified"
+#~ msgstr "Edytuj ogłoszenie"
+
+#~ msgid "my"
+#~ msgstr "moje ogłoszenia"
+
+#~ msgid "Topic"
+#~ msgstr "Zasięg"
+
+#~ msgid "read more..."
+#~ msgstr "czytaj więcej"
