@@ -16,8 +16,8 @@ To do:
   - Home page
   - View page
   - Display 
-  - album 
-  - media
+    - album 
+    - media
   - Previews
   - Add album
   - Add media
@@ -29,3 +29,8 @@ To do:
 - Sources
   - Fix curent handlers
   - Add more handlers
+
+- Import
+  - Current import too complicated
+  - Add import per version
+  - add import from other galleries
