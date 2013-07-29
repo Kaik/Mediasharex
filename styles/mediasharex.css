@@ -601,11 +601,12 @@ ul.mediasharex_itemmenu ul li:hover ul li a:hover{ /* Here we define the most ex
 	position:relative;
 }
 
-.mediasharex_display_subalbum span{
+.mediasharex_display_subalbum_icon {
 	top:50px;
 	left:10px;
 	position:absolute;
 	z-index:10;
+	color:#fff;	
 }
 
 /*  

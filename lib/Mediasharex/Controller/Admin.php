@@ -24,18 +24,19 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
+
 		
 		//Get users module settings
 		$modulevars = ModUtil::getVar('Mediasharex');
 		$this->view->assign('modulevars', $modulevars);
 		
+		//Get users module settings
+		$infolinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getInfoLinks');
+		$this->view->assign('infolinks', $infolinks);		
+		
 		$dir_check['mediaDirName']['writable'] = ModUtil::apiFunc('Mediasharex', 'admin', 'mediashareDirIsWritable',$modulevars['mediaDirName']);
 		$dir_check['tmpDirName']['writable']   = ModUtil::apiFunc('Mediasharex', 'admin', 'mediashareDirIsWritable',$modulevars['tmpDirName']);		
         $this->view->assign('dir_check', $dir_check);
-
-		$moduleinfo = ModUtil::getInfoFromName('Mediasharex');
-		$this->view->assign('moduleinfo',$moduleinfo);
-
 
 		//Get albums		
 		$albumsManager = new Mediasharex_Manager_Albums();
@@ -55,13 +56,119 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$this->view->assign('sources',$sources);
 		
         // Assign all the module vars
-        return $this->view->fetch('admin/info.tpl');
+        return $this->view->fetch('admin/info/status.tpl');
     }	
 
+    /**
+     */
+    public function info_docs()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+       $langtype   = $this->request->query->get('langtype',  isset($args['langtype']) ? $args['langtype'] : 'en');
+       $dirtype   = $this->request->query->get('dirtype',  isset($args['dirtype']) ? $args['dirtype'] : 'admin');
+       $file_name   = $this->request->query->get('file_name',  isset($args['file_name']) ? $args['file_name'] : 'introduction.rst');
+		
+		
+		$file_path = 'modules/Mediasharex/docs/'.$langtype.'/'.$dirtype.'/'.$file_name;
+
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+
+		$docslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getDocsLinks');
+		$this->view->assign('docslinks', $docslinks);
+		//$docs = ModUtil::apiFunc('Mediasharex', 'admin', 'getDocs');
+		//$this->view->assign('docs', $docs);
+		
+		//Get users module settings
+		$infolinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getInfoLinks');
+		$this->view->assign('infolinks', $infolinks);		
+		//;
+
+		
+		$file_content = Mediasharex_Util_RstFile::readFile($file_path);
+		$this->view->assign('file_content',$file_content);
+		$this->view->assign('file_path',$file_path);		
+        // Assign all the module vars
+        return $this->view->fetch('admin/info/file_view.tpl');
+    }
+	
+
+	
+	
+    /**
+     */
+    public function info_modify_file()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+        // Confirm the forms authorisation key
+        //$this->checkCsrfToken();
+
+		$file_path = $this->request->getPost()->get('file_path');		
+		$this->view->assign('file_path',$file_path);
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$infolinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getInfoLinks');
+		$this->view->assign('infolinks', $infolinks);		
+
+
+		$file_content = Mediasharex_Util_RstFile::getFile($file_path);
+		$this->view->assign('file_content',$file_content);
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/info/modify_file.tpl');
+    }	
 
     /**
-      */
-    public function mainsettings()
+     */
+    public function info_save_file()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$file_path = $this->request->getPost()->get('file_path');		
+		$this->view->assign('file_path',$file_path);
+		$file_content = $this->request->getPost()->get('file_content');	
+		
+			
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$infolinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getInfoLinks');
+		$this->view->assign('infolinks', $infolinks);		
+
+		$ok = Mediasharex_Util_RstFile::saveFile($file_path,$file_content);
+		$this->view->assign('ok',$ok);
+		
+		$file_contentn = Mediasharex_Util_RstFile::getFile($file_path);
+		$this->view->assign('file_content',$file_contentn);
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/info/modify_file.tpl');
+    }
+
+    /**
+     */
+    public function settings_general()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
@@ -70,18 +177,20 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		
 		//Get users module settings
 		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);	
 
-		$dir_check['mediaDirName']['writable'] = ModUtil::apiFunc('Mediasharex', 'admin', 'mediashareDirIsWritable',$modulevars['mediaDirName']);
-		$dir_check['tmpDirName']['writable']   = ModUtil::apiFunc('Mediasharex', 'admin', 'mediashareDirIsWritable',$modulevars['tmpDirName']);		
-        $this->view->assign('dir_check', $dir_check);				
+		
         // Assign all the module vars
-        return $this->view->assign('modulevars', $modulevars)
-            			  ->fetch('admin/mainsettings.tpl');
+        return $this->view->fetch('admin/settings/general.tpl');
     }
 
     /**
    */
-    public function updatemainsettings()
+    public function settings_general_update()
     {
         // Security check
         if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
@@ -106,18 +215,410 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 
         // This function generated no output, and so now it is complete we redirect
         // the user to an appropriate page for them to carry on their work
-        $this->redirect(ModUtil::url($this->name, 'admin', 'main'));
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_general'));
     }
-
     /**
-   */
-    public function managealbums()
+     */
+    public function settings_display()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
 		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/display.tpl');
+    }
+
+    /**
+   */
+    public function settings_display_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_display'));
+    }
+
+    /**
+     */
+    public function settings_albums()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/albums.tpl');
+    }
+
+    /**
+   */
+    public function settings_albums_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_albums'));
+    }
+
+    /**
+     */
+    public function settings_media()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/media.tpl');
+    }
+
+    /**
+   */
+    public function settings_media_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_media'));
+    }
+
+
+    /**
+     */
+    public function settings_storage()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/storage.tpl');
+    }
+    /**
+   */
+    public function settings_storage_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_storage'));
+    }
+
+
+    /**
+     */
+    public function settings_sources()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/sources.tpl');
+    }
+    /**
+   */
+    public function settings_sources_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_sources'));
+    }
+
+    /**
+     */
+    public function settings_handlers()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+
+
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/handlers.tpl');
+    }
+    /**
+   */
+    public function settings_handlers_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_handlers'));
+    }
+
+    /**
+     */
+    public function settings_import()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
+		$this->view->assign('settingslinks', $settingslinks);		
+
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/settings/import.tpl');
+    }
+    /**
+   */
+    public function settings_import_update()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+
+        // Confirm the forms authorisation key
+        $this->checkCsrfToken();
+
+		$modulevars = $this->request->getPost()->get('modulevars');
+
+		if (is_array($modulevars)){
+		foreach ($modulevars as $optionname => $value) {
+			 if ($optionname !== 'activate'){	
+			 $this->setVar($optionname, $value);	
+			 }
+		 }				
+		}				
+		
+        // the module configuration has been updated successfuly
+        $this->registerStatus($this->__('Done! Saved module configuration.'));
+
+        // This function generated no output, and so now it is complete we redirect
+        // the user to an appropriate page for them to carry on their work
+        $this->redirect(ModUtil::url($this->name, 'admin', 'settings_import'));
+    }
+
+
+    /**
+     */
+    public function manager()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		//Get users module settings
+		$managerlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getManagerLinks');
+		$this->view->assign('managerlinks', $managerlinks);		
+
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/manager/manager.tpl');
+    }
+
+
+    /**
+     */
+    public function manager_albums()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$managerlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getManagerLinks');
+		$this->view->assign('managerlinks', $managerlinks);		
+
         $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);
 
 
@@ -129,35 +630,43 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$pager = $albums->getPager();		
 		
 		
-		//Get users module settings
-		$modulevars = ModUtil::getVar('Mediasharex');
-				
+        $this->view->assign('albums',$albums_array)
+						  ->assign('pager',$pager);	
+
+		
         // Assign all the module vars
-        return $this->view->assign('albums',$albums_array)
-						  ->assign('pager',$pager)		
-            			  ->fetch('admin/managealbums.tpl');
-    }
-	
+        return $this->view->fetch('admin/manager/albums.tpl');   
+		
+	 }
 	    /**
      */
-	public function modify_album($args)
+	public function manager_modify_album($args)
     {		
         // Create Form output object
         $render = FormUtil::newForm('Mediasharex', $this);
 
         // Return the output that has been generated by this function
-        return $render->execute("user/modify_album.tpl", new Mediasharex_Handler_ModifyAlbum());
+        return $render->execute("admin/manager/modify/album.tpl", new Mediasharex_Handler_ModifyAlbum());
     
 	}
 
     /**
      */
-    public function manageitems()
+    public function manager_media()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$managerlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getManagerLinks');
+		$this->view->assign('managerlinks', $managerlinks);		
+
         $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);	
 		
 		$MediaItems = new Mediasharex_Manager_MediaItems();
@@ -171,29 +680,41 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$modulevars = ModUtil::getVar('Mediasharex');
 				
         // Assign all the module vars
-        return $this->view->assign('items',$mediaitems_array)
-						  ->assign('pager',$pager)	
-            			  ->fetch('admin/manageitems.tpl');
+        $this->view->assign('items',$mediaitems_array)
+						  ->assign('pager',$pager);	
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/manager/media.tpl');
     }
+
     /**
      */
-	public function modify_media($args)
+	public function manager_modify_media($args)
     {		
         // Create Form output object
         $render = FormUtil::newForm('Mediasharex', $this);
 
         // Return the output that has been generated by this function
-        return $render->execute("user/modify_mediaitem.tpl", new Mediasharex_Handler_ModifyMediaItem());
+        return $render->execute("admin/manager/modify/media.tpl", new Mediasharex_Handler_ModifyMediaItem());
     
 	}
+
     /**
-    */
-    public function managemediastore()
+     */
+    public function manager_previews()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$managerlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getManagerLinks');
+		$this->view->assign('managerlinks', $managerlinks);		
 
         $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);
 
@@ -207,30 +728,112 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$modulevars = ModUtil::getVar('Mediasharex');
 				
         // Assign all the module vars
-        return $this->view->assign('mediastore',$MediaStore_array)
-						  ->assign('pager',$pager)
-            			  ->fetch('admin/managemediastore.tpl');
-    }	
+        $this->view->assign('mediastore',$MediaStore_array)
+						  ->assign('pager',$pager);
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/manager/previews.tpl');
+    }
+
 	/**
     */
-	public function modify_storeitem($args)
+	public function manager_modify_preview($args)
     {		
         // Create Form output object
         $render = FormUtil::newForm('Mediasharex', $this);
 
         // Return the output that has been generated by this function
-        return $render->execute("admin/modify_storeitem.tpl", new Mediasharex_Handler_ModifyStoreItem());
+        return $render->execute("admin/manager/modify/preview.tpl", new Mediasharex_Handler_ModifyStoreItem());
     
 	}
-	
-    /**
-    */
-    public function managehandlers()
+
+	    /**
+     */
+    public function manager_invitations()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
+ 
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$managerlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getManagerLinks');
+		$this->view->assign('managerlinks', $managerlinks);		
+
+        
+        $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);		
+		
+		
+		$Invitations = new Mediasharex_Manager_Invitations();
+		$Invitations->setPage($page);
+		$Invitations->setOrderby('id','ASC');
+		$Invitations_array = $Invitations->getAll();
+		$pager = $Invitations->getPager();		
+		
+				
+        // Assign all the module vars
+        return $this->view->assign('Invitations',$Invitations_array)
+						  ->assign('pager',$pager)		
+            			  ->fetch('admin/manager/invitations.tpl');
+    }	
+
+
+
+	    /**
+    */
+	public function manager_modify_invitation($args)
+    {		
+        // Create Form output object
+        $render = FormUtil::newForm('Mediasharex', $this);
+
+        // Return the output that has been generated by this function
+        return $render->execute("admin/manager/modify/invitation.tpl", new Mediasharex_Handler_ModifyInvitation());
+    
+	}
+
+    /**
+     */
+    public function sandh()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$sandhlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSandHLinks');
+		$this->view->assign('sandhlinks', $sandhlinks);		
+				
+        // Assign all the module vars
+        return $this->view->fetch('admin/sandh/sandh.tpl');
+    }
+
+    /**
+     */
+    public function sandh_handlers()
+    {
+        // Security check
+        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            throw new Zikula_Exception_Forbidden();
+        }
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$sandhlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSandHLinks');
+		$this->view->assign('sandhlinks', $sandhlinks);		
+		
+
         $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);		
 		
 		$mediaHandlers = new Mediasharex_Manager_MediaHandlers();
@@ -245,28 +848,30 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$modulevars = ModUtil::getVar('Mediasharex');
 				
         // Assign all the module vars
-        return $this->view->assign('mediaHandlers',$mediaHandlers_array)
+        $this->view->assign('mediaHandlers',$mediaHandlers_array)
 						  ->assign('pager',$pager)
-						  ->assign('files',$files)			
-            			  ->fetch('admin/managehandlers.tpl');
+						  ->assign('files',$files);	
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/sandh/handlers.tpl');
     }
 	
 	    /**
      */
-	public function modify_handler($args)
+	public function sandh_modify_handler($args)
     {		
         // Create Form output object
         $render = FormUtil::newForm('Mediasharex', $this);
 
         // Return the output that has been generated by this function
-        return $render->execute("admin/modify_handler.tpl", new Mediasharex_Handler_ModifyHandler());
+        return $render->execute("admin/sandh/modify/handler.tpl", new Mediasharex_Handler_ModifyHandler());
     
 	}	
 
 
     /**
     */
-    public function reloadhandlers()
+    public function sandh_reload_handlers()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
@@ -289,15 +894,24 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         return $this->managehandlers();
     }
 	
+	
 	    /**
-      */
-    public function managesources()
+     */
+    public function sandh_sources()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
-        
+		
+		//Get users module settings
+		$modulevars = ModUtil::getVar('Mediasharex');
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$sandhlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSandHLinks');
+		$this->view->assign('sandhlinks', $sandhlinks);	
+
         $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : -1);		
 		
 		
@@ -309,31 +923,31 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		
 		$files = $mediaSources->getSourcesDir();
 		
-		//Get users module settings
-		$modulevars = ModUtil::getVar('Mediasharex');
 				
         // Assign all the module vars
-        return $this->view->assign('mediaSources',$mediaSources_array)
+        $this->view->assign('mediaSources',$mediaSources_array)
 						  ->assign('pager',$pager)	
-						  ->assign('files',$files)							  	
-            			  ->fetch('admin/managesources.tpl');
+						  ->assign('files',$files);		
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/sandh/sources.tpl');
     }
 
 	    /**
      */
-	public function modify_source($args)
+	public function sandh_modify_source($args)
     {		
         // Create Form output object
         $render = FormUtil::newForm('Mediasharex', $this);
 
         // Return the output that has been generated by this function
-        return $render->execute("admin/modify_source.tpl", new Mediasharex_Handler_ModifySource());
+        return $render->execute("admin/sandh/modify/source.tpl", new Mediasharex_Handler_ModifySource());
     
 	}
 
     /**
      */
-    public function reloadsources()
+    public function sandh_reload_sources()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
@@ -355,48 +969,48 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         // Assign all the module vars
         return $this->managesources();
     }
-
-	    /**
+	
+	
+    /**
      */
-    public function manageinvitations()
+    public function media_types()
     {
         // Security check
         if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             throw new Zikula_Exception_Forbidden();
         }
-        
-        $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);		
-		
-		
-		$Invitations = new Mediasharex_Manager_Invitations();
-		$Invitations->setPage($page);
-		$Invitations->setOrderby('id','ASC');
-		$Invitations_array = $Invitations->getAll();
-		$pager = $Invitations->getPager();		
-		
 		
 		//Get users module settings
 		$modulevars = ModUtil::getVar('Mediasharex');
-				
+		$this->view->assign('modulevars', $modulevars);
+		
+		//Get users module settings
+		$sandhlinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSandHLinks');
+		$this->view->assign('sandhlinks', $sandhlinks);		
+		
+
+        $page   = $this->request->query->get('page',  isset($args['page']) ? $args['page'] : 1);		
+		
+		$mediaHandlers = new Mediasharex_Manager_MediaHandlers();
+		$mediaHandlers->setPage($page);
+		$mediaHandlers->setOrderby('id','ASC');
+		$mediaHandlers_array = $mediaHandlers->getAll();
+		$pager = $mediaHandlers->getPager();		
+
         // Assign all the module vars
-        return $this->view->assign('Invitations',$Invitations_array)
-						  ->assign('pager',$pager)		
-            			  ->fetch('admin/manageinvitations.tpl');
+        $this->view->assign('mediaHandlers',$mediaHandlers_array)
+						  ->assign('pager',$pager)
+						  ->assign('files',$files);	
+		
+        // Assign all the module vars
+        return $this->view->fetch('admin/media_types.tpl');
     }	
+	
+	
+	
+	
 
-
-
-	    /**
-    */
-	public function modify_invitation($args)
-    {		
-        // Create Form output object
-        $render = FormUtil::newForm('Mediasharex', $this);
-
-        // Return the output that has been generated by this function
-        return $render->execute("admin/modify_invitation.tpl", new Mediasharex_Handler_ModifyInvitation());
-    
-	}	
+	
 	    /**
      */
     public function import()
@@ -435,7 +1049,7 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 
 	    /**
     */
-    public function importenabletables()
+    public function import_enabletables()
     {
 		$enabletablesmode = $this->request->getPost()->get('enableimporttables', false);
 		$this->setVar('enableimporttables', $enabletablesmode);	
@@ -444,7 +1058,7 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 	}
     /**
     */
-    public function manageimport()
+    public function import_manage()
     {
         // Security check
         if (!SecurityUtil::checkPermission($this->name . '::', '::', ACCESS_ADMIN)) {
@@ -471,6 +1085,8 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         				  ->fetch('admin/import_status.tpl');
     }	
 	
+
+
 	
 
 }

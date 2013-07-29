@@ -44,7 +44,8 @@ class Mediasharex_Manager_Album
         if (!$this->_item) {
             return false;
         }
-
+		$this->getThemeCheck();
+		
         return $this->_item->toArray();
     }
 	
@@ -56,7 +57,7 @@ class Mediasharex_Manager_Album
      */
     public function getSubAlbums()
     {
-        if (!$this->_item) {
+        if (!$this->_item->getId()) {
             return false;
         }
 		
@@ -68,7 +69,19 @@ class Mediasharex_Manager_Album
 		
         return $subalbums->getAll();
     }
-	
+
+	    /**
+     * return page as array
+     *
+     * @return array|boolean false
+     */
+    public function getThemeCheck()
+    {
+        if ($this->_item->getTemplate() == '') {
+            $this->_item->setTemplate('standard');
+        }
+		
+    }	
 	
 	    /**
      * return page as array

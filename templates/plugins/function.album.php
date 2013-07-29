@@ -34,7 +34,12 @@ function smarty_function_album($params, $view)
 		$handler_html = $handler->getDisplay($data, $preview ,$width ,$height ,$richMedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));	
 		}
 
-		$out  = '<div class="mediasharex_album">'.$handler_html.'</div>';
+        if (!$handler_html) {
+		$handler_html = '<a href="'.$url.'" class="tip" "'.$data['title'].'"><i class="icon-picture" style="font-size:'.$height.'px;"></i> </a>'; 	
+		
+		}
+		
+		$out  = '<div class="mediasharex_display_subalbum_icon"  style="width:'.$width.'px;height:'.$height.'px;">'.$handler_html.'</div>';
 		
 		return $out;
 

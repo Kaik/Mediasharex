@@ -25,21 +25,57 @@ class Mediasharex_Controller_User extends Zikula_AbstractController
         }
 
 
-        //$this->view->assign(ModUtil::apiFunc('Mediasharex', 'user', 'getCats'));
-        // assign the module vars
+        // Get parameters from whatever input we need
+        $album = $this->request->query->get('album',  isset($args['album']) ? $args['album'] : 1);
+        $media   = $this->request->query->get('media',  isset($args['media']) ? $args['media'] : false);
+
+		$album['template'] = 'standard';		
+		
+		if ($album){									
+		$albumManager = new Mediasharex_Manager_Album($album);			
+		$album = $albumManager->getItemArray();				
+	    $this->view->assign('album',     $album);
+		$this->view->assign('subalbums',$albumManager->getSubAlbums());
+		$this->view->assign('mediaitems',$albumManager->getMediaItems());
+		//$this->view->assign('mainitem2',$albumManager->getMainmedia());		
+		//redirect				
+		$template = 'user/themes/'.$album['template'].'/album.tpl';
+				
+		if ($media){		
+		$mediaManager = new Mediasharex_Manager_MediaItem($media);
+		$mediaitem = $mediaManager->getItemArray();			
+	    $this->view->assign('mediaitem',     $mediaitem);	
+		$template = 'user/themes/'.$album['template'].'/mediaitem.tpl';		
+		
+		}else{
+		$mediaManager = new Mediasharex_Manager_MediaItem($media);
+		$mediaitem = $mediaManager->getItemArray();			
+	    $this->view->assign('mediaitem',     $mediaitem);			
+		}			
+		}elseif ($media){
+		$mediaManager = new Mediasharex_Manager_MediaItem($media);
+		$mediaitem = $mediaManager->getItemArray();			
+	    $this->view->assign('mediaitem',     $mediaitem);			
+		
+		$albumManager = new Mediasharex_Manager_Album($mediaitem['parentalbum']);
+		$album = $albumManager->getItemArray();				
+	    $this->view->assign('album',     $album);
+		
+		$template = 'user/themes/'.$album['template'].'/mediaitem.tpl';			
+					
+
+		}
+
+		//$this->view->assign(ModUtil::apiFunc('Mediasharex', 'user', 'getAlbumCats'));				
+
+		//$this->view->assign(ModUtil::apiFunc('Mediasharex', 'user', 'getMediaCats'));			
+	    $this->view->assign(ModUtil::apiFunc('Mediasharex', 'user', 'getAccess'));
+		// assign the module vars
         $this->view->assign(ModUtil::getVar('Mediasharex'));
-        // assign the items to the template, values for the filters
-        $this->view->assign('items',         $items)
-		           ->assign('top_items',     $top_items)
-                   ->assign('page',          $page)
-                   ->assign('ccat',          $category)
-                   ->assign('total_public',  34)
-                   ->assign('total_registered', 230);					   				   
-         //          ->assign(ModUtil::apiFunc('Mediasharex', 'user', 'getAccess'));        
-        //$this->view->assign('pager', array('numitems'     => $count,
-        //          						   'itemsperpage' => $fetchargs['items']));
+
         // Return the output
-        return $this->view->fetch('user/home.tpl');
+        return $this->view->fetch($template);
+		
     }
 
     /**
@@ -60,8 +96,6 @@ class Mediasharex_Controller_User extends Zikula_AbstractController
 		$mediaManager2->setOrderby('hitcount','DESC');
 		$mediaManager2->setItems(3);
 		$this->view->assign('popular_items',$mediaManager2->getAll());
-
-
 
         // Return the output
         return $this->view->fetch('user/home.tpl');
@@ -127,33 +161,24 @@ class Mediasharex_Controller_User extends Zikula_AbstractController
         // Get parameters from whatever input we need
         $album = $this->request->query->get('album',  isset($args['album']) ? $args['album'] : 1);
         $media   = $this->request->query->get('media',  isset($args['media']) ? $args['media'] : false);
-
-		//$template = 'user/media/mediaitem.tpl';
+	
 		
-		
-		if ($album){
-			
-			
-					
-		$albumManager = new Mediasharex_Manager_Album($album);
-			
+		if ($album){									
+		$albumManager = new Mediasharex_Manager_Album($album);			
 		$album = $albumManager->getItemArray();				
 	    $this->view->assign('album',     $album);
-
 		$this->view->assign('subalbums',$albumManager->getSubAlbums());
 		$this->view->assign('mediaitems',$albumManager->getMediaItems());
 		//$this->view->assign('mainitem2',$albumManager->getMainmedia());		
-		//redirect		
-		
-			
-		$template = 'user/album/album.tpl';
-			
-		
+		//redirect
+						
+		$template = 'user/themes/'.$album['template'].'/album/album.tpl';
+				
 		if ($media){		
 		$mediaManager = new Mediasharex_Manager_MediaItem($media);
 		$mediaitem = $mediaManager->getItemArray();			
 	    $this->view->assign('mediaitem',     $mediaitem);	
-		$template = 'user/media/mediaitem.tpl';		
+		$template = 'user/themes/'.$album['template'].'/media/mediaitem.tpl';		
 		
 		}else{
 		$mediaManager = new Mediasharex_Manager_MediaItem($media);
@@ -164,11 +189,13 @@ class Mediasharex_Controller_User extends Zikula_AbstractController
 		$mediaManager = new Mediasharex_Manager_MediaItem($media);
 		$mediaitem = $mediaManager->getItemArray();			
 	    $this->view->assign('mediaitem',     $mediaitem);			
-		$template = 'user/media/mediaitem.tpl';
 		
 		$albumManager = new Mediasharex_Manager_Album($mediaitem['parentalbum']);
 		$album = $albumManager->getItemArray();				
-	    $this->view->assign('album',     $album);			
+	    $this->view->assign('album',     $album);
+		
+		$template = 'user/themes/'.$album['template'].'/media/mediaitem.tpl';			
+					
 
 		}
 
