@@ -62,7 +62,7 @@ class Mediasharex_Manager_MediaItem
             return false;
         }
 		
-		$this->original = 
+		//$this->original = 
 		
 		$store = new Mediasharex_Manager_MediaStoreItem($this->_item->getOriginal());
         

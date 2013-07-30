@@ -1,11 +1,9 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
-{*modulelinks links=$sandhlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'*}
-
+{modulelinks links=$sandhlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 <div class="z-admin-content-pagetitle">
-    {icon type="display" size="small"}
-    <h3>{gt text="Media types"}</h3>
+<h3><i class="mediasharex-icon-tags"></i> {gt text="Media types"}</h3>
 </div>
-
 <div id="mediasharex_managehandlers_mimetypes">
     <h3>{gt text="Supported media types"}</h3>
 <table id="mediasharex_managehandlers_table" class="z-datatable">

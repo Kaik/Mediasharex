@@ -1,11 +1,10 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$managerlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 
 <div class="z-admin-content-pagetitle">
-    {icon type="info" size="small"}
-    <h3>{gt text="Mediasharex status"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Content manager"}</h3>
 </div>
-        {include file='file:modules/Mediasharex/docs/en/admin/info.rst'}
 
 <div id="mediasharex_info" class="z-clearfix">
     <div id="mediasharex_info_" class="z-clearfix">
@@ -13,7 +12,7 @@
 
         <div class="z-formrow">
         <h3>{gt text="Module informations"}</h3>
-        <p>{gt text="Version"}: {$moduleinfo.version}</p>
+        <p>{gt text="Version"}: {$modvars.version}</p>
 
         </div>
         

@@ -35,16 +35,27 @@ function smarty_function_mediaitem($params, &$smarty)
         if ($handlerManager->exist()) {
         $handlerManager->loadfile();
         $handler = $handlerManager->loadHandler();
-		$result = $handler->getDisplay($data, $preview ,$width ,$height ,$richMedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));
-		
-        return $result;
+		$handler_html = $handler->getDisplay($data, $preview ,$width ,$height ,$richMedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));
 		}
 
-	 //   return $result;		
+		$folder_height = $height + 60;
+		$folder_width = $height + 20;
 		
-	//	}
-
-	
-	
+		//handler is dealing with url because of rich media
+        if (!$handler_html) {
+		$handler_html = '
+		<a href="'.$url.'" class="tip" "'.$data['title'].'">
+		<div style="width:100%;height:'.$folder_height.'px;"></div>		
+		</a>
+		'; 			
+		}		
+		$out  = '
+		<div class="mediasharex_display_plugin_media">				
+		<div class="mediasharex_display_plugin_media_thumbnail"  style="width:'.$folder_width.'px;height:'.$height.'px;">
+		'.$handler_html.'		
+		</div>
+		</div>';
+		
+		return $out;
 
 }

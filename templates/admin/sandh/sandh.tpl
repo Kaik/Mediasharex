@@ -1,11 +1,9 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$sandhlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
-
 <div class="z-admin-content-pagetitle">
-    {icon type="info" size="small"}
-    <h3>{gt text="Media handling"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Media handling"}</h3>
 </div>
-
 <div id="mediasharex_info" class="z-clearfix">
     <div id="mediasharex_info_" class="z-clearfix">
       <div id="mediasharex_install_status" class="z-w40 z-formrow z-floatleft">   

@@ -29,49 +29,49 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
 
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'info'),
-            				 'text' => $this->__('Info'),
-            				 'class' => 'z-icon-es-info',
+            				 'text' => $this->__(' Info'),
+            				 'class' => 'mediasharex-icon-laptop',
 							 'links' => $this->getInfoLinks());
         }
 
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'info_docs'),
-            				 'text' => $this->__('Documentation'),
-            				 'class' => 'icon-cogs');
+            				 'text' => $this->__(' Documentation'),
+            				 'class' => 'mediasharex-icon-cabinet');
         }
 		
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'settings_general'),
-            				 'text' => $this->__('Settings'),
-            				 'class' => 'icon-cogs',
+            				 'text' => $this->__(' Settings'),
+            				 'class' => 'mediasharex-icon-cogs',
 							 'links' => $this->getSettingsLinks());
         }		
 		
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'manager'),
-            				 'text' => $this->__('Content manager'),
-            				 'class' => 'z-icon-es-inf',
+            				 'text' => $this->__(' Content manager'),
+            				 'class' => 'mediasharex-icon-folder',
 							 'links' => $this->getManagerLinks());
         }		
 		
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'sandh'),
-            				 'text' => $this->__('Sources & Handlers'),
-            				 'class' => 'z-icon-es-inf',
+            				 'text' => $this->__(' Sources & Handlers'),
+            				 'class' => 'mediasharex-icon-equalizer',
 							 'links' => $this->getSandHLinks());
         }
 		
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'media_types'),
-            				 'text' => $this->__('Media types'),
-            				 'class' => 'z-icon-es-inf',
+            				 'text' => $this->__(' Media types'),
+            				 'class' => 'mediasharex-icon-star',
 							 'links' => $this->getMediaTypesLinks());
         }		
 		
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'import'),
-            				 'text' => $this->__('Import'),
-            				 'class' => 'z-icon-es-inf',
+            				 'text' => $this->__(' Import'),
+            				 'class' => 'mediasharex-icon-loop',
 							 'links' => $this->getImportLinks());
         }			
 		
@@ -199,7 +199,8 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
     {
 		$links_arr = array();
 		foreach($tree as $lang => $type_folders){
-		$url = ModUtil::url($this->name, 'admin', 'info_docs');			
+		$url = ModUtil::url($this->name, 'admin', 'info_docs');
+		$class = 'mediasharex-icon-folder-open';				
 		$file = $lang;
 		$links = $this->getDocsTypeLinks($tree[$lang]);	
 		$links_arr[] = $this->getDocLink($url, $file, $class, $links);
@@ -216,7 +217,8 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
     {
         $links_arr = array();
 		foreach($folders as $folder_name => $files){
-		$url = ModUtil::url($this->name, 'admin', 'info_docs');			
+		$url = ModUtil::url($this->name, 'admin', 'info_docs');
+		$class = 'mediasharex-icon-folder-open';							
 		$file = $folder_name;
 		$links = $this->getDocsFileLinks($files);	
 		$links_arr[] = $this->getDocLink($url, $file, $class, $links);
@@ -234,6 +236,7 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
         $links_arr = array();					
 		foreach($files as $file_name => $file_check){
 		$url = ModUtil::url($this->name, 'admin', 'info_docs',array('langtype'=>$file_check['langtype'],'dirtype'=>$file_check['dirtype'],'file_name'=>$file_name));			
+		$class = 'mediasharex-icon-file';	
 		$file = $file_name;
 		$links = false;	
 		$links_arr[] = $this->getDocLink($url, $file, $class, $links);	

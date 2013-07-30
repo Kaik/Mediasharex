@@ -9,58 +9,58 @@
 <div id="mediasharex_home_picture_big" class="MC580 z-clearfix z-floatleft">
 {mediaitem data=$new_items.0   width=580  height=390  preview="full" id="media-`$new_items.0.id`" richMedia=true class='big'}    
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$new_items.0.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$new_items.0.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$new_items.0.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$new_items.0.hitcount}{/nocache}</span>      
 </div>
 </div>
 
 <div id="mediasharex_home_picture_right_1" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatright">
  {mediaitem data=$new_items.1  preview="thumbnail" id="media-`$new_items.1.id`" class='thumbnail'}   
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 <div id="mediasharex_home_picture_right_2" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatright">
  {mediaitem data=$new_items.2 preview="thumbnail" id="media-`$new_items[2]id`" class='thumbnail'}    
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 <div id="mediasharex_home_picture_right_3" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatright">
   {mediaitem data=$new_items.3 preview="thumbnail" id="media-`$new_items[3]id`" class='thumbnail'}   
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 <div id="mediasharex_home_picture_left_1" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatleft">
  {mediaitem data=$new_items.4 preview="thumbnail" id="media-`$new_items[4]id`" class='thumbnail'}    
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 <div id="mediasharex_home_picture_left_2" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatleft">
   {mediaitem data=$new_items.5 preview="thumbnail" id="media-`$new_items[5]id`" class='thumbnail'}   
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 <div id="mediasharex_home_picture_left_3" class="mediasharex_home_pictures_right MC180 z-clearfix z-floatleft">
   {mediaitem data=$new_items.6 preview="thumbnail" id="media-`$new_items[6]id`" class='thumbnail'}   
 <div id="mediasharex_home_picture_big_info">   
-<span class="tip" title="{gt text="Category"}"><i class="icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
-<span class="tip" title="{gt text='Author'}"><i class="icon-user"></i> {$item.author}</span>
-<span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
+<span class="tip" title="{gt text="Category"}"><i class="mediasharex-icon-sitemap"></i> <a href="{modurl modname='Mediasharex' type='user' func='view' category=$item.__CATEGORIES__.Cat.name}">&nbsp;{$item.__CATEGORIES__.Cat.display_name.$lang}&nbsp;</a></span>
+<span class="tip" title="{gt text='Author'}"><i class="mediasharex-icon-user"></i> {$item.author}</span>
+<span class="tip" title="{gt text='Views'}"><i class="mediasharex-icon-eye-open"></i> {nocache}{$item.hitcount}{/nocache}</span>      
 </div>
 </div>
 

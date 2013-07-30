@@ -14,6 +14,9 @@ class Mediasharex_Manager_Album
     private $subalbums;
 	private $items;
 	
+	private $mainmedia;
+	private $original;		
+	
     /**
      * construct
      */
@@ -25,7 +28,8 @@ class Mediasharex_Manager_Album
         $this->columns = $this->tables['mediasharex_albums_column'];	
 
         $this->_item = new Mediasharex_Base_Album();
-
+        $this->mainmedia = new Mediasharex_Base_MediaItem();
+        $this->original = new Mediasharex_Base_MediaStoreItem();		
         if (isset($item)) {
             $this->_item->set($item);
         } elseif ($id > 0) {
@@ -46,7 +50,11 @@ class Mediasharex_Manager_Album
         }
 		$this->getThemeCheck();
 		
-        return $this->_item->toArray();
+		$mediaItemFull = array_merge($this->mainmedia->toArray(),$this->original->toArray());
+		
+		$out = array_merge($mediaItemFull,$this->_item->toArray());		
+		
+        return $out;
     }
 	
 	
@@ -105,16 +113,17 @@ class Mediasharex_Manager_Album
      *
      * @return array|boolean false
      */
-    public function getMainmedia()
+    public function includeMainmedia()
     {
         if (!$this->_item->getMainmedia()) {
             return false;
         }
 		
-		$mediaManager = new Mediasharex_Manager_MediaItem($this->_item->getMainmedia());		
+		//$this->original = 
 		
-		$mediaManager->includeOriginal();
-        return $mediaManager->getItemArray();
+		//$media = new Mediasharex_Manager_MediaItem($this->_item->getMainmedia());
+        //$media->includeOriginal();
+        //$this->_item->setMainmedia($media->getItemArray());
     }	
 
     /**
@@ -148,9 +157,28 @@ class Mediasharex_Manager_Album
                               'instance_middle'  => 'objectid',
                               'instance_right'   => 'id',
                               'level'            => ACCESS_READ);
+							  
+	   	  $join[] = array(
+	   'join_table' => 'mediasharex_media',
+       'join_field' => array('original','handler'),
+       'object_field_name' => array('original','handler'),
+       'compare_field_table' => 'mainmedia',
+       'compare_field_join' => 'id',
+       );  	
+	  $join[] = array(
+	   'join_table' => 'mediasharex_mediastore',
+       'join_field' => array('fileref','mimetype','width','height','bytes'),
+       'object_field_name' => array('fileref','mimetype','width','height','bytes'),
+       'compare_field_table' => 'a.original',
+       'compare_field_join' => 'id',
+       ); 	   
+	   					  
 
-       return $item = DBUtil::selectObjectByID($this->table, $id, 'id', null, $permFilter);		
+        $item = DBUtil::selectExpandedObjectByID($this->table, $join, $id, 'id', null, $permFilter);		
 		
+		$this->mainmedia->set($item);
+		$this->original->set($item);
+		return $item;
 	}
 
 	public function save()

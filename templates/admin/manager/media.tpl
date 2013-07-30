@@ -1,9 +1,9 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$managerlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 
 <div class="z-admin-content-pagetitle">
-    {icon type="display" size="small"}
-    <h3>{gt text="Manage Media"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Manage invitations"}</h3>
 </div>
 <div id="mediasharex_manageitems">
 <table id="mediasharex_manageitems_table" class="z-datatable">

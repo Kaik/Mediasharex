@@ -1,0 +1,73 @@
+#mediasharex {
+	color: #000000;	
+}
+
+#mediasharex_info {	
+
+}
+
+#mediasharex_info {	
+
+}
+
+/*
+ * 
+ * Admin Docs
+ * 
+ */
+
+#mediasharex_admin_info_docs{
+
+}
+#mediasharex_admin_info_docs_content{
+background: #fff;
+}
+
+#mediasharex_admin_info_docs_form{
+
+
+}
+
+#mediasharex_admin_info_docs_file_content{
+
+}
+
+#mediasharex_admin_info_docs_directory_tree{
+
+}
+
+#mediasharex_admin_info_docs_directory_tree ul{
+list-style:none;
+}
+
+
+
+/*  
+ * Display album
+ */
+.mediasharex_display_album {
+	position:relative;
+}
+
+.mediasharex_display_album_thumbnail {
+	top:50px;
+	left:10px;
+	position:absolute;
+	z-index:10;
+	color:#fff;	
+}
+
+/*  
+ * Display album
+ */
+.mediasharex_display_media {
+	position:relative;
+}
+
+.mediasharex_display_media_thumbnail {
+	top:10px;
+	left:10px;
+	position:absolute;
+	z-index:10;
+	color:#fff;	
+}

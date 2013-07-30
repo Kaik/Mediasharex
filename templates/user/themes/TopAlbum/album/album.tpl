@@ -20,7 +20,7 @@
 
  <h1>{$album.title}</h1>
  <div class="">
-<i class="icon-folder-open"></i> {$album.title}      
+<i class="mediasharex-icon-folder-open"></i> {$album.title}      
  </div>        
 </div>     
   {if $mediaitems|@count >0}
@@ -39,8 +39,7 @@
   <div id="mediasharex_display_subalbums" class="z-clearfix z-clearer">
   <h3>{gt text="Albums"}</h3>  
   {foreach from=$subalbums item=subalbum}
-  <div class="mediasharex_display_subalbum MC180 z-floatleft">
-   <div class="icon-folder-close " style="font-size:180px"></div>   
+  <div class="MC180 z-floatleft"> 
    {modurl assign=url modname=Mediasharex type=user func=display album=$subalbum.id}
    {album data=$subalbum width=140 url=$url height=90 preview='thumbnail'}          
    <p>{$subalbum.title}</p>   

@@ -1,9 +1,9 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$managerlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 
 <div class="z-admin-content-pagetitle">
-    {icon type="display" size="small"}
-    <h3>{gt text="Manage albums"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Manage albums"}</h3>
 </div>
 
 <div id="mediasharex_managealbums">
@@ -67,7 +67,7 @@
              {$album.thumbnailsize}  
             </td>
             <td>
-            <a href="{modurl modname='Mediasharex' type='user' func='modify_album' id=$album.id}">{gt text="Edit"}</a> 
+            <a href="{modurl modname='Mediasharex' type='admin' func='manager_modify_album' id=$album.id}"><i class="mediasharex-icon-pencil" ></i> {gt text="Edit"}</a> 
             </td>
         </tr>
     {/foreach}

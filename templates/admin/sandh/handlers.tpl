@@ -1,9 +1,8 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$sandhlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
-
 <div class="z-admin-content-pagetitle">
-    {icon type="display" size="small"}
-    <h3>{gt text="Media handlers"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Media handlers"}</h3>
 </div>
 {if $files|@count neq $mediaHandlers|@count}
 <div class="z-informationmsg">

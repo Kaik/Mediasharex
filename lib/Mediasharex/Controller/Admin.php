@@ -70,7 +70,7 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 
        $langtype   = $this->request->query->get('langtype',  isset($args['langtype']) ? $args['langtype'] : 'en');
        $dirtype   = $this->request->query->get('dirtype',  isset($args['dirtype']) ? $args['dirtype'] : 'admin');
-       $file_name   = $this->request->query->get('file_name',  isset($args['file_name']) ? $args['file_name'] : 'introduction.rst');
+       $file_name   = $this->request->query->get('file_name',  isset($args['file_name']) ? $args['file_name'] : '1_introduction.rst');
 		
 		
 		$file_path = 'modules/Mediasharex/docs/'.$langtype.'/'.$dirtype.'/'.$file_name;
@@ -250,15 +250,9 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         // Confirm the forms authorisation key
         $this->checkCsrfToken();
 
-		$modulevars = $this->request->getPost()->get('modulevars');
-
-		if (is_array($modulevars)){
-		foreach ($modulevars as $optionname => $value) {
-			 if ($optionname !== 'activate'){	
-			 $this->setVar($optionname, $value);	
-			 }
-		 }				
-		}				
+		$enabletablesmode = $this->request->getPost()->get('enableimporttables', false);
+		$this->setVar('enableimporttables', $enabletablesmode);	
+        return $this->import();				
 		
         // the module configuration has been updated successfuly
         $this->registerStatus($this->__('Done! Saved module configuration.'));
@@ -281,6 +275,9 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		$modulevars = ModUtil::getVar('Mediasharex');
 		$this->view->assign('modulevars', $modulevars);
 		
+
+		
+		
 		//Get users module settings
 		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
 		$this->view->assign('settingslinks', $settingslinks);		
@@ -298,18 +295,8 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
             throw new Zikula_Exception_Forbidden();
         }
 
-        // Confirm the forms authorisation key
-        $this->checkCsrfToken();
-
-		$modulevars = $this->request->getPost()->get('modulevars');
-
-		if (is_array($modulevars)){
-		foreach ($modulevars as $optionname => $value) {
-			 if ($optionname !== 'activate'){	
-			 $this->setVar($optionname, $value);	
-			 }
-		 }				
-		}				
+		$enablealbumattributies = $this->request->getPost()->get('enablealbumattributies', true);
+		$this->setVar('enablealbumattributies', $enablealbumattributies);					
 		
         // the module configuration has been updated successfuly
         $this->registerStatus($this->__('Done! Saved module configuration.'));

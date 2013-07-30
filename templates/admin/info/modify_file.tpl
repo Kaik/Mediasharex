@@ -1,3 +1,4 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$infolinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 

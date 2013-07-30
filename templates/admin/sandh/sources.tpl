@@ -1,10 +1,9 @@
+{include file="admin/admin_header.tpl"}
 {adminheader}
 {modulelinks links=$sandhlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 <div class="z-admin-content-pagetitle">
-    {icon type="display" size="small"}
-    <h3>{gt text="Media sources"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Media sources"}</h3>
 </div>
-
 <div class="z-informationmsg">
 <a href="{modurl modname='Mediasharex' type='admin' func='manager_reload_sources'}"> {icon type="regenerate" size="extrasmall"} {gt text="Reload sources"}</a> 
 </div>

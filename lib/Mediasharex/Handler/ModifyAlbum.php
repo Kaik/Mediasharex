@@ -17,7 +17,8 @@ class Mediasharex_Handler_ModifyAlbum extends Zikula_Form_AbstractHandler
             throw new Zikula_Exception_Forbidden(LogUtil::getErrorMsgPermission());
         }
      
-        $id   = FormUtil::getPassedValue('id', isset($args['id']) ? $args['id'] : null, 'GETPOST');         
+        $id   = FormUtil::getPassedValue('id', isset($args['id']) ? $args['id'] : null, 'GETPOST');
+        $redirect   = FormUtil::getPassedValue('redirect', isset($args['redirect']) ? $args['redirect'] : null, 'GETPOST');		         
 		$this->id = $id;   		              
         $view->caching = false;
 		
@@ -25,10 +26,11 @@ class Mediasharex_Handler_ModifyAlbum extends Zikula_Form_AbstractHandler
 		$this->item = $albumManager->getItemArray();		             
 	    $item = $this->item; 
         $view->assign($item);
+		$view->assign('album',$item);
 		 
 		$view->assign('subalbums',$albumManager->getSubAlbums());
 		$view->assign('mediaitems',$albumManager->getMediaItems());
-		$view->assign('mainitem2',$albumManager->getMainmedia());		
+		//$view->assign('mainitem2',$albumManager->getMainmedia());		
 		//redirect
         $view->assign('redirect', (isset($redirect) && !empty($redirect)) ? true : false);
 

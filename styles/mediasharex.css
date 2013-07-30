@@ -597,17 +597,35 @@ ul.mediasharex_itemmenu ul li:hover ul li a:hover{ /* Here we define the most ex
 /*  
  * Display album
  */
-.mediasharex_display_subalbum {
+.mediasharex_display_album {
 	position:relative;
 }
 
-.mediasharex_display_subalbum_icon {
+.mediasharex_display_album_thumbnail {
 	top:50px;
 	left:10px;
 	position:absolute;
 	z-index:10;
 	color:#fff;	
 }
+
+/*  
+ * Display album
+ */
+.mediasharex_display_media {
+	position:relative;
+}
+
+.mediasharex_display_media_thumbnail {
+	top:30px;
+	left:10px;
+	position:absolute;
+	z-index:10;
+	color:#fff;	
+}
+
+
+
 
 /*  
  * Display 
