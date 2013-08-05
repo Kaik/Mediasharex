@@ -16,7 +16,7 @@ class Mediasharex_Api_User extends Zikula_AbstractApi
             return LogUtil::registerPermissionError();
         }
         
-        $all['catreg'] = CategoryRegistryUtil::getRegisteredModuleCategories('Mmediasharex', 'mediasharex_media');
+        $all['catreg'] = CategoryRegistryUtil::getRegisteredModuleCategories('Mediasharex', 'mediasharex_media');
                
         $all = CategoryUtil::getSubCategories($all['catreg']['Cat']);
         
@@ -36,7 +36,7 @@ class Mediasharex_Api_User extends Zikula_AbstractApi
             return LogUtil::registerPermissionError();
         }
         
-        $all['catreg'] = CategoryRegistryUtil::getRegisteredModuleCategories('Mmediasharex', 'mediasharex_albums');
+        $all['catreg'] = CategoryRegistryUtil::getRegisteredModuleCategories('Mediasharex', 'mediasharex_albums');
                
         $all = CategoryUtil::getSubCategories($all['catreg']['Cat']);
         

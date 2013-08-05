@@ -37,6 +37,16 @@ class Mediasharex_Manager_MediaStore
 		$this->orderby .= ' '.strtoupper($sortorder);
 	}	
 
+
+	public function setMainmedia($mediaitem = -1)
+	{	                 
+        $mediaitem = DataUtil::formatForStore($mediaitem);
+        $this->whereclause[] = $this->columns['mediaitem']."= $mediaitem";	
+    }
+
+
+
+
 	public function setpermFilter()
 	{
 

@@ -1,9 +1,11 @@
 {include file="admin/admin_header.tpl"}
 {adminheader}
-
 <div id="mediasharex_admin_manager_modify_album" class="z-clearfix">
 {formerrormessage id='message'}      
 {form cssClass="z-form" enctype="multipart/form-data"}
+{modurl modname='Mediasharex' type='admin' func='manager_modify_album' id=$id assign='redirect'}
+{formtextinput textMode="hidden" id="redirect"}
+{formtextinput textMode="hidden" id="id"}
     {if $id >0}
      <div class="z-admin-content-pagetitle">
         <h1><i class="mediasharex-icon-folder"></i> {gt text="Modify album"}</h1>
@@ -17,16 +19,40 @@
     <div id="mediasharex_admin_manager_modify_album_form" class="z-clearfix">
 
     <div id="mediasharex_admin_manager_modify_album_buttons">
-       <div class="z-buttons z-right">
-        {formbutton class=""  commandName="back"  __text="Back"}
-        {formbutton class=""      commandName="update"  __text="Update"}             
+       <div class="z-buttons">
+        {formbutton class="mediasharex-button-back"        commandName="back"    __text="Back"}
+        {formbutton class="mediasharex-button-update"      commandName="update"  __text="Update"}             
        </div>
     </div> 
       
     <div id="mediasharex_admin_manager_modify_album_preview" class="z-w45 z-floatleft">
           <div id="mediasharex_admin_manager_modify_album_media" class="z-clearfix z-clearer">
           <h3>{gt text="Album preview"}</h3>
-             {album data=$album preview='thumbnail' width=150 height=140}         
+  <div class="mediasharex_preview_album_thumbnail-large z-clearfix">
+  <div class="mediasharex_preview_album_thumbnail-large_image_box" style="height:280px;width:280px;" >          
+      <div class="mediasharex_preview_album_thumbnail-large_image_icon mediasharex-icon-folder-close" style="font-size:320px;">   
+      </div>
+    
+      <div class="mediasharex_preview_album_thumbnail-large_image"> 
+       {album data=$album width=280 height=280}     
+      </div> 
+  </div>  
+  
+    <div class="mediasharex_preview_album_thumbnail-large_bottom" style="width:280px;">
+    <h3>{$album.title}</h3>
+    <p>{$album.description}</p>
+    <div class="mediasharex_preview_album_thumbnail-large_bottom_imfo">
+         <span class="tip" title="{gt text='Published'}"><i class="icon-time"></i> {$album.cr_date|date_format:"%H:%m %d/%m/%y"}</span>   
+        &nbsp;
+        <span class="tip" title="{gt text='Views'}"><i class="icon-eye-open"></i> {nocache}{$album.hitcount}{/nocache}</span>
+        &nbsp;
+        <span class="tip" title="{gt text='Comments'}"><i class="icon-comment"></i> {$album.handler}</span> 
+    </div>                
+    
+         
+    </div>     
+  </div>          
+                  
           </div>                  
       {if $mediaitems|@count >0}
           <div id="mediasharex_admin_manager_modify_album_media" class="z-clearfix z-clearer">
@@ -77,11 +103,11 @@
         </div>
         <div id="mediasharex_admin_manager_modify_album_access" class="z-formrow">
         <label for="groups_gtype">{gt text="Access"}</label>
-                 {formdropdownlist id='gtype' items=$gtypes}
+                 {formdropdownlist id='accesslevel' items=$access_select}
         </div>
         <div id="mediasharex_admin_manager_modify_album_template" class="z-formrow">
         <label for="groups_gtype">{gt text="Theme"}</label>
-                 {formdropdownlist id='gtype' items=$gtypes}
+                 {formdropdownlist id='template' items=$themes_select}
         </div>        
                       
         <div id="mediasharex_admin_manager_modify_album_description" class="z-formrow">
@@ -162,10 +188,42 @@
         </div>
         
                  
-   </div>     
+   </div>
+    <div id="mediasharex_admin_manager_modify_album_editor_extapp">
+    <h3><i class="mediasharex-icon-download-alt"></i> {gt text="Album meta data"}</h3>     
+
+    {if $__ATTRIBUTIES__}
+    {foreach from=$__ATTRIBUTIES__ key=key item=attr}
+    
+         <div class="z-formrow">          
+            {formlabel for="__ATTRIBUTIES__" __text="Atr name"}
+            {formtextinput id="__ATTRIBUTIES__[$key][name]" size="10" maxLength="20"}
+         
+            {formlabel for="__ATTRIBUTIES__" __text="Atr value" mandatory=true}
+            {formtextinput id="__ATTRIBUTIES__[$key][value]" size="10" maxLength="20"}         
+        </div>    
+    
+       
+    {/foreach}
+    {else}
+    
+          <div class="z-formrow">          
+            {formlabel for="__ATTRIBUTIES__" __text="Atr name"}
+            {formtextinput id="__ATTRIBUTIES__[][name]" size="10" maxLength="20"}
+         
+            {formlabel for="__ATTRIBUTIES__" __text="Atr value" mandatory=true}
+            {formtextinput id="__ATTRIBUTIES__[][value]" size="10" maxLength="20"}         
+        </div>    
+    
+    {/if}
+        
+                 
+   </div>    
+   
+       
    </div>                         
   </div>
 {/form}
 </div>
 {adminfooter}
-{zdebug}
+{*zdebug*}

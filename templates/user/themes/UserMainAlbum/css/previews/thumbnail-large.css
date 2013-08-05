@@ -1,0 +1,52 @@
+/*
+ * 
+ * Preview list css
+ * 
+ */
+
+
+/*Album
+ */
+.mediasharex_preview_album_thumbnail-large {
+margin-bottom:20px;
+width:50%;
+height:480px;
+overflow:hidden;
+float:left;
+}
+
+.mediasharex_preview_album_thumbnail-large_image_box{
+ float:left;
+ position:relative;	
+}
+
+.mediasharex_preview_album_thumbnail-large_image_icon{
+ position:absolute;
+ top:0;
+ left:0;	
+}
+
+.mediasharex_preview_album_thumbnail-large_image{
+ position:absolute;
+ top:85px;
+ left:0;	
+}
+
+.mediasharex_preview_album_thumbnail-large_right{
+
+}
+/*Media
+ */
+.mediasharex_preview_media_thumbnail-large {
+
+	
+}
+
+.mediasharex_preview_media_thumbnail-large_image {
+float:left;	
+}
+
+.mediasharex_preview_media_thumbnail-large_title {
+float:left;
+width:200px;	
+}

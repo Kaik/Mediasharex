@@ -22,7 +22,7 @@ function Mediasharex_tables()
         'summary'        => 'summary',
         'template'       => 'template',
         'parentalbum'  	 => 'parentalbum',
-        'access'         => 'accesslevel',
+        'accesslevel'         => 'accesslevel',
         'viewkey'        => 'viewkey',
         'mainmedia'      => 'mainmedia',
         'thumbnailsize'  => 'thumbnailsize',

@@ -58,13 +58,13 @@ class Mediasharex_Manager_MediaSource
      *
      * @return array|boolean false
      */
-    public function readPost($view)
+    public function readPost($data)
     {
     	
 	if($this->exist()){
 	 $this->loadfile();	
 	 $this->loadSource();		
-	 $cleandata = $this->source->getPostData($view);	
+	 $cleandata = $this->source->getPostData($data);	
 	}
 
 	return $cleandata;

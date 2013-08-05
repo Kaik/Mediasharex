@@ -3,7 +3,7 @@
 {modulelinks links=$managerlinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 
 <div class="z-admin-content-pagetitle">
-<h3><i class="mediasharex-icon-folder"></i> {gt text="Manage invitations"}</h3>
+<h3><i class="mediasharex-icon-folder"></i> {gt text="Media list"}</h3>
 </div>
 <div id="mediasharex_manageitems">
 <table id="mediasharex_manageitems_table" class="z-datatable">
@@ -21,6 +21,9 @@
     <th>
     <span class="z-nowrap">{gt text="Author"}</span>
     </th>
+    <th>
+    <span class="z-nowrap">{gt text="Category"}</span>
+    </th>    
     <th>
     <span class="z-nowrap">{gt text="MediaHandler"}</span>
     </th>
@@ -42,13 +45,16 @@
              {$item.id}   
             </td>
             <td>
-             {$item.parentalbum}   
+             <i class="mediasharex-icon-folder-close-alt "></i> {$item.parentalbum}   
             </td>
             <td>
              {$item.title}   
             </td>
             <td>
-             {$item.author}  
+             {usergetvar name='uname' uid=$item.author} 
+            </td>
+            <td>
+            {$item.__CATEGORIES__.Cat.name}
             </td>
             <td>
              {$item.handler}  
@@ -60,7 +66,7 @@
              {$item.position}   
             </td>
             <td>
-            <a href="{modurl modname='Mediasharex' type='admin' func='modify_mediaitem' id=$item.id}">{gt text="Edit"}</a>    
+            <a href="{modurl modname='Mediasharex' type='admin' func='manager_modify_media' id=$item.id}">{gt text="Edit"}</a>    
             </td>
         </tr>
     {/foreach}

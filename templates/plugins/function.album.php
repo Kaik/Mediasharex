@@ -6,13 +6,13 @@ function smarty_function_album($params, $view)
 
 
     $data       = isset($params['data']) ? $params['data'] : false;
-    $preview 	 = isset($params['preview']) ? $params['preview'] : 'add';
+    $preview 	 = isset($params['preview']) ? $params['preview'] : false;
     $url 	 = isset($params['url']) ? $params['url'] : false;
 	//override defaults and previews
-    $width       = isset($params['width']) ? $params['width'] : null;
-    $height       = isset($params['height']) ? $params['height'] : null;
+    $width       = isset($params['width']) ? $params['width'] : false;
+    $height       = isset($params['height']) ? $params['height'] : false;
 	
-    $richMedia       = isset($params['richMedia']) ? $params['richMedia'] : false;	
+    $richmedia       = isset($params['richmedia']) ? $params['richmedia'] : false;	
   
     $class       = isset($params['class']) ? $params['class'] : null;
     $style       = isset($params['style']) ? $params['style'] : null;
@@ -20,37 +20,56 @@ function smarty_function_album($params, $view)
     $onmousedown = isset($params['onmousedown']) ? $params['onmousedown'] : null;
 
 
-   	
+		//manage override
+		if($width){
+		$out_width = $width;			
+		}elseif($preview['width'] !== ''){
+		$out_width = $preview['width'];									
+		}else{			
+		//safe defs
+		$out_width = 100;						
+		}
+		if($height){
+		$out_height = $height;				
+		}else if($preview['height'] !== ''){
+		$out_height = $preview['height'];			
+		}else {					
+		$out_height = 100;					
+		}		
+		if($richmedia){
+		$out_richmedia = $richmedia;				
+		}else if($preview['richmedia'] !== ''){
+		$out_richmedia = $preview['richmedia'];			
+		}else {					
+		$out_richmedia = false;					
+		}
+
+		$out_width = $out_width - ($out_width * 0.1);
+		$out_height = $out_height - ($out_height * 0.5);
+
+
+   		//album thumbnail
     	$handlername = $data['handler'];
 		$handlername = ucfirst($handlername);
-		$h['handler'] = $handlername;
-		
-		
-        $handlerManager = new Mediasharex_Manager_MediaHandler(null,$h);
-		
+		$h['handler'] = $handlername;		
+        $handlerManager = new Mediasharex_Manager_MediaHandler(null,$h);		
         if ($handlerManager->exist()) {
         $handlerManager->loadfile();
         $handler = $handlerManager->loadHandler();
-		$handler_html = $handler->getDisplay($data, $preview ,$width ,$height ,$richMedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));	
+		$handler_html = $handler->getDisplay($data, $out_width, $out_height ,$out_richmedia, $url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));	
 		}
 
-		$folder_height = $height + 100;
-		$folder_width = $height + 100;
+		//$folder_height = $out_height;
 
         if (!$handler_html) {
 		$handler_html = '
 		<a href="'.$url.'" class="tip" "'.$data['title'].'">
-		<div style="width:100%;height:'.$folder_height.'px;"></div>		
+		<div style="width:100%;height:'.$folder_height.'px;"> </div>		
 		</a>
 		'; 			
 		}		
-		$out  = '
-		<div class="mediasharex_display_album">
-		<div class="mediasharex-icon-folder-close " style="font-size:'.$folder_height.'px;"></div> 				
-		<div class="mediasharex_display_album_thumbnail"  style="width:'.$folder_width.'px;height:'.$height.'px;">
-		'.$handler_html.'		
-		</div>
-		</div>';
+		
+		$out  = $handler_html;
 		
 		return $out;
 

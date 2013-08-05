@@ -19,56 +19,22 @@ class Mediasharex_MediaHandlers_Youtube
  	}
 		
 		
-    public function getDisplay($data, $preview ,$width ,$height ,$richMedia ,$html_options)
+    public function getDisplay($data, $width, $height, $richmedia, $html_options)
     {		
+		$fileref = $data['fileref'];			
 		
-		$previews = array('icons'=> array('width'  =>50,
-										  'height' =>50,
-										  'image'   => 'youtube.png'),
-										  
-						  'thumbnail'=> array('width'  =>180,
-										  'height' =>180,
-										  'image'   => $data['fileref']),
-						  
-						  'full'=> array('width'  =>425,
-										  'height' =>350,
-										  'image'   => $data['fileref'])										  
-										  
-										  
-										  );			
-
-		//manage previews
-		if(isset($previews[$preview])){
-			
-		$out_width = $previews[$preview]['width'];	
-		$out_height = $previews[$preview]['height'];	
-		$fileref = $previews[$preview]['image'];
-		}
-
-		//manage override
-		if($width){
-		$out_width = $width;
-		$fileref = $data['fileref'];				
-		}
-
-		if($height){
-		$out_height = $height;
-		$fileref = $data['fileref'];				
-		}
-		
-		
-		$out_html = $this->getHtml($data, $fileref,$out_width,$out_height,$richMedia,$html_options);
+		$out_html = $this->getHtml($data, $fileref, $width, $height, $richmedia, $html_options);
      
         return $out_html;	
 		
 		}
 
 
-    public function getHtml($data,$fileref,$width ,$height ,$richMedia ,$html_options)
+    public function getHtml($data, $fileref, $width, $height, $richmedia, $html_options)
 	{
 		
 		
-		if ($richMedia){
+		if ($richmedia){
 
 		$theData = $this->getyoutubeid($fileref);		
 			

@@ -24,7 +24,7 @@
  <h1>{$mediaitem.title}</h1>
 {include file="user/breadcrubs.tpl"}
 <div>   
- {mediaitem data=$mediaitem width=780 height=780  preview="full" id="media-`$mediaitem.id`" class='full'}
+ {mediaitem data=$mediaitem preview=$c_preview_data id="media-`$mediaitem.id`" class='full'}
 </div>        
 </div> 
  

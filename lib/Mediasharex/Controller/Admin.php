@@ -229,6 +229,11 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
 		//Get users module settings
 		$modulevars = ModUtil::getVar('Mediasharex');
 		$this->view->assign('modulevars', $modulevars);
+
+		$previewsManager = new Mediasharex_Manager_Previews();
+		$this->view->assign('previews', $previewsManager->getPreviews());
+
+
 		
 		//Get users module settings
 		$settingslinks = ModUtil::apiFunc('Mediasharex', 'admin', 'getSettingsLinks');
@@ -250,12 +255,47 @@ class Mediasharex_Controller_Admin extends Zikula_AbstractController
         // Confirm the forms authorisation key
         $this->checkCsrfToken();
 
-		$enabletablesmode = $this->request->getPost()->get('enableimporttables', false);
-		$this->setVar('enableimporttables', $enabletablesmode);	
-        return $this->import();				
-		
+		$previews = $this->request->getPost()->get('previews', false);
+
+		foreach ($previews as $preview_name => $preview_data){
+		  	if ($preview_data['remove']){
+			unset($preview_data['remove']);		
+			unset($previews[$preview_name]);	
+		  	}else{						
+			$update_preview_name = $preview_data['name'];
+			unset($preview_data['name']);	
+			$update_preview = $preview_data;	
+			unset($previews[$preview_name]);
+			$previews[$update_preview_name] = $update_preview;								
+			}
+		}	
+
+		$new_preview = $this->request->getPost()->get('new_preview', false);
+
+		if ($new_preview['name'] !== ''){
+		$new_preview_name = $new_preview['name'];
+		unset($new_preview['name']);	
+		$previews[$new_preview_name] = $new_preview;	
+		}
+
+		//var_dump($previews);
+		//exit();		
+
+
+
+
+		$previewsManager = new Mediasharex_Manager_Previews();
+		$previewsManager->setPreviews($previews);
+		$saved = $previewsManager->savePreviews();
+
+	
+		if($saved){
         // the module configuration has been updated successfuly
-        $this->registerStatus($this->__('Done! Saved module configuration.'));
+        $this->registerStatus($this->__('Done! Saved module configuration.'));			
+		}else{
+        // the module configuration has been updated successfuly
+        $this->registerError($this->__('Update failed'));				
+		}		
 
         // This function generated no output, and so now it is complete we redirect
         // the user to an appropriate page for them to carry on their work

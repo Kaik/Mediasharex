@@ -43,43 +43,59 @@ class Mediasharex_MediaHandlers_Imagegd
  	}	
 	
 		
-    public function getDisplay($data, $preview ,$width ,$height, $richMedia,$url ,$html_options)
+    public function getDisplay($data, $width ,$height, $richmedia,$url ,$html_options)
     {		
-		
-		$previews = array('icons'=> array('width'  =>50,
-										  'height' =>50,
-										  'image'   => 'imagegd.png'),
-										  
-						  'thumbnail'=> array('width'  =>180,
-										  'height' =>180,
-										  'image'   => $data['fileref']),										  
-						  'full'=> array('width'  =>780,
-										  'height' =>780,
-										  'image'   => $data['fileref'])										  
-										  
-										  );			
 
-		//manage previews
-		if(isset($previews[$preview])){
-			
-		$out_width = $previews[$preview]['width'];	
-		$out_height = $previews[$preview]['height'];	
-		$fileref = $previews[$preview]['image'];
+		//var_dump($preview);
+		//exit();	
+				
+		if ($data['fileref'] == ''){			
+		return false;
 		}
 
-		//manage override
-		if($width){
-		$out_width = $width;
-		$fileref = $data['fileref'];				
-		}
+		$fileref = $data['fileref'];	
+		
+		
+		$MediaDir = ModUtil::getVar('Mediasharex','mediaDirName',false);
 
-		if($height){
-		$out_height = $height;
-		$fileref = $data['fileref'];				
-		}
+		$filepath = $MediaDir.'/'.$fileref;   // /blank_avatar.png;//
+
 		
+    	$preset_name = 'Mediasharex_handler_imagegd_'.$width;
+    	$preset_data = array(
+        'width' => $width,
+        'height' => $height,
+       	'mode' => 'outset',
+       	'__module' => 'Mediasharex'
+    	);
+ 
+    	$preset = new SystemPlugin_Imagine_Preset($preset_name, $preset_data);
 		
-		$out_html = $this->getHtml($data,$url,$fileref,$out_width,$out_height,$richMedia,$html_options);
+		//var_dump($preset);
+		//exit(0);
+		
+		$manager = ServiceUtil::getManager()->getService('systemplugin.imagine.manager');
+		$imagine = new \Imagine\Imagick\Imagine();	
+		$manager->setImagine($imagine);			
+		$manager->setPreset($preset);		
+		//$test = $manager->getPreset();
+		//var_dump($test);
+		//exit(0);		 
+		//$image = $imagine->open($filepath);				
+		//$size  = new Imagine\Image\Box($width, $height);
+		//$image->resize($size);						
+		//$tmpDir = $manager->getThumbDir();
+	
+    	$file_tmb = $manager->getThumb($filepath);
+		//$file_tmb  = 'mediashare/test/text.jpg';
+
+		//var_dump($file_tmb);
+		//exit(0);		
+		
+		//$image->save($file_tmb);    	
+    	
+
+		$out_html = $this->getHtml($data,$url,$file_tmb,$width,$height,$richmedia,$html_options);
      
         return $out_html;	
 		
@@ -91,10 +107,8 @@ class Mediasharex_MediaHandlers_Imagegd
 		if($url == ''){
 		$url = ModUtil::url('Mediasharex','user','display', array('album'=>$data['parentalbum'],'media'=>$data['id']));
 		}		
-		$MediaDir = ModUtil::getVar('Mediasharex','mediaDirName',false);
 		
-			
-		$out_html = '<a href="'.$url.'" class="tip" "'.$data['title'].'">  <img  src="'.$MediaDir.'/'.$fileref.'"  width="'.$width.'" height="'.$height.'"  /></a>'; 	
+		$out_html = '<a href="'.$url.'" class="tip" title="'.$data['title'].'"> <img width="'.$width.'" height="'.$height.'"  src="'.$fileref.'"/></a>'; 	
 				
        
        

@@ -186,6 +186,11 @@ class Mediasharex_Manager_Album
 		
 	   $item = $this->_item->toArray();
 	   
+	   
+		//echo ('<pre>');		
+		//var_dump($item);
+		//exit(0);
+	   
 	   if($item['id'] > 0){
        return DBUtil::updateObject($item, $this->table);		   	
 	   }else{

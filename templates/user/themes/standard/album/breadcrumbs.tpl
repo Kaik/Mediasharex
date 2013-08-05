@@ -1,3 +1,3 @@
  <div class="">
-<i class="icon-folder-open"></i> {$album.title}      
+<i class="mediasharex-icon-folder-open"></i> {$album.title}      
  </div> 

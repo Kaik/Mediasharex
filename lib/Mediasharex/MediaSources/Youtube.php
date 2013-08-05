@@ -30,23 +30,47 @@ class Mediasharex_MediaSources_Youtube
     return $templates[$preview];  	
  	}
 	
-	public function getPostData($view)
+	public function getPluginSettings()
 	{
-		
-	$plugin = $view->getPluginById($this->getName());	
-				$plugin->load($view); 
-				$plugin->decode($view);						
-				$plugindata = $view->getValues();
-	$fileinfo = $plugindata[$this->getName()];			
+		//@ Zikula_Form_Plugin_UploadInput
+		$settings['id'] = $this->getName();
+     	$settings['maxLength'] = '100';
+		$settings['width'] = '300px';		
+		//$settings['width'] = '';
+		//$settings['height'] = '';
+     	//$settings['inputName'] = '';
+     	//$settings['readOnly'] = '';
+     	$settings['cssClass'] = 'mediasharex_source_text_field';
+    	//$settings['dataField'] = ;
+     	//$settings['dataBased'] = ;
+     	//$settings['group'] = ;
+     	//$settings['isValid'] = ;
+     	//$settings['mandatory'] = ;
+     	//$settings['errorMessage'] = ;
+     	//$settings['myLabel'] = ;	
+									
+	return $settings;		
+	}	
+	public function getPlugin($view)
+	{
+		$plugin = $view->registerPlugin('Zikula_Form_Plugin_TextInput', $this->getPluginSettings());											
+		return $plugin;		
+	}	
+	
+	public function getPostData($fileinfo)
+	{		
 					
-	$pre_item = $this->getFileInfo($fileinfo);	//pre save
-
-	$odata['pre_item'] = $pre_item;
-	$odata['pre_item']['fileref'] = $fileinfo;
-	$odata['pre_item']['name'] = $this->getName();
+		$pre_item = $this->getFileInfo($fileinfo);	//pre save
+	
+		$odata['pre_media'] = $pre_item;
+		$odata['pre_media']['fileref'] = $fileinfo;
+		$odata['pre_media']['previewname'] = 'original';
+		$odata['pre_media']['mimetype'] = 'video/youtubecode';		
+		$odata['pre_media']['handler'] = $this->getName();
 	 
 	  return $odata;	  	
  	}
+	
 	
 	public function getFileInfo($edata)
 	{
@@ -56,19 +80,7 @@ class Mediasharex_MediaSources_Youtube
 	
 	return $odata;	  	
  	}
-	
-	public function getPlugin($view)
-	{
 
-		$par['id'] = $this->getName();
-     	$par['maxLength'] = 100;		
-		$plugin = $view->registerPlugin('Zikula_Form_Plugin_TextInput', $par);						
-	return $plugin;		
-	}	
-
-	
-	
-    
     public function getDisplay($data, $preview ,$width ,$height ,$richMedia ,$html_options)
     {		
 		

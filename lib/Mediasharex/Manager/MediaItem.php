@@ -118,7 +118,68 @@ class Mediasharex_Manager_MediaItem
 		
 	}
 
+
+	    /**
+     * return page as array
+     *
+     * @return array|boolean false
+     */
+    public function getPreviews()
+    {
+        if (!$this->_item->getId()) {
+            return false;
+        }
+		
+		//$this->original = 
+		
+		$store = new Mediasharex_Manager_MediaStore();
+        
+		$store->setMainmedia($this->_item->getId());
+		
+        return $store->getAll();
+    }
+
+	    /**
+     * return page as array
+     *
+     * @return array|boolean false
+     */
+    public function setOriginalPreview($original)
+    {
+        if (!$original) {
+            return false;
+        }
+		
+		//$this->original->set($original);
+		
+		$previewManager = new Mediasharex_Manager_MediaStoreItem(null,$original);        
+		$savedOriginal = $previewManager->save();
+		
+		if (!$savedOriginal){
+		return false;				
+		}
+		
+		$this->_item->setOriginal($savedOriginal['id']);
+ 
+		return true;
+    }
 	
+	    /**
+     * return page as array
+     *
+     * @return array|boolean false
+     */
+    public function	postUpdateOriginalPreview($mediaitem)
+    {
+        if (!$mediaitem) {
+            return false;
+        }    	
+	$previewManager = new Mediasharex_Manager_MediaStoreItem($this->_item->getOriginal()); 			
+		$original = $previewManager->getItem();			
+		$original->setMainitem($mediaitem);	
+	$previewManager->save();	
+		
+    }
 
 	public function save()
 	{

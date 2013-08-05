@@ -1,3 +1,5 @@
+
+{* OG header  *}
 {modurl modname='Mediasharex' type='user' func='display' album=$album.id assign='ogurl' fqurl="true"}
 {assign var="ogtitle" value=$album.title}
 {assign var="ogdesc" value=$album.description}
@@ -11,43 +13,51 @@
 {pageaddvar name="header" value="<meta property='og:description' content='$ogdesc' />"}
 {pageaddvar name="header" value="<meta property='fb:admins' content='100000160712484' />"}
 {pageaddvar name="header" value="<meta property='fb:app_id' content='189868131069252' />"}
-{include file="user/header.tpl"}
-<div id="mediasharex" class="MC780 z-clearfix">
-{include file="user/menu.tpl"}
-{include file="user/previews.tpl"}
-<div id="mediasharex_display_album" >
-<div id="mediasharex_display_item" >
 
+{* Include base js css etc. *}
+{include file="user/header.tpl"}
+
+{* Include album js css etc. *}
+{pageaddvar name='stylesheet' value="modules/Mediasharex/templates/user/themes/`$album.template`/css/album.css"}
+{pageaddvar name='javascript' value="modules/Mediasharex/templates/user/themes/`$album.template`/js/album.js"}
+{pageaddvar name="stylesheet" value="modules/Mediasharex/templates/user/themes/`$album.template`/css/previews/`$c_preview`.css"}
+{pageaddvar name="javascript" value="modules/Mediasharex/templates/user/themes/`$album.template`/css/previews/`$c_preview`.js"}
+
+
+<div id="mediasharex" class="z-clearfix">
+
+{* Include base js css etc. *}
+{include file="user/menu.tpl"}
+<div id="mediasharex_display_album" >
  <h1>{$album.title}</h1>
- <div class="">
-<i class="mediasharex-icon-folder-open"></i> {$album.title}      
- </div>        
-</div>     
+<div id="mediasharex_display_album_description" class="">
+    {$album.description}
+</div>
+ 
+{* Include previews. *}
+{include file="user/previews.tpl"}
+
+<div id="mediasharex_display_album_media" class="z-clearer z-clearfix">       
   {if $mediaitems|@count >0}
-  <div id="mediasharex_display_mediaitems" class="z-clearfix z-clearer">
-  <h3>{gt text="Media items"}</h3>  
+  <h3>{gt text="Media"}</h3>  
   {foreach from=$mediaitems item=mediaitem}
-  <div class="display_mediaitem MC180 z-floatleft">
-    {modurl assign=url modname=Mediasharex type=user func=display album=$mediaitem.parentalbum media=$mediaitem.id}
-    {mediaitem data=$mediaitem width=140 url=$url height=90 preview='thumbnail'}
-   <p>{$mediaitem.title}</p> 
-  </div>
+  {include file="user/themes/`$album.template`/previews/media/preview_`$c_preview`.tpl"}
   {/foreach}
-  </div>
-  {/if}  
+  {/if} 
+</div>     
+
+
+<div id="mediasharex_display_album_albums" class="z-clearer z-clearfix"> 
   {if $subalbums|@count >0}
-  <div id="mediasharex_display_subalbums" class="z-clearfix z-clearer">
   <h3>{gt text="Albums"}</h3>  
   {foreach from=$subalbums item=subalbum}
-  <div class="MC180 z-floatleft"> 
-   {modurl assign=url modname=Mediasharex type=user func=display album=$subalbum.id}
-   {album data=$subalbum width=140 url=$url height=90 preview='thumbnail'}          
-   <p>{$subalbum.title}</p>   
-  </div>
+  {include file="user/themes/`$album.template`/previews/album/preview_`$c_preview`.tpl"}  
   {/foreach}
-  </div>
   {/if}
 </div> 
+
+
 </div>
-{zdebug}
+</div>
+{*zdebug*}
 

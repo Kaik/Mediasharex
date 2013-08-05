@@ -9,10 +9,10 @@ function smarty_function_mediaitem($params, &$smarty)
     $preview 	 = isset($params['preview']) ? $params['preview'] : false;
     $url 	 = isset($params['url']) ? $params['url'] : false;
 	//override defaults and previews
-    $width       = isset($params['width']) ? $params['width'] : null;
-    $height       = isset($params['height']) ? $params['height'] : null;
-	
-    $richMedia       = isset($params['richMedia']) ? $params['richMedia'] : false;	
+    $width       = isset($params['width']) ? $params['width'] : false;
+    $height       = isset($params['height']) ? $params['height'] : false;
+
+    $richmedia       = isset($params['richmedia']) ? $params['richmedia'] : false;	
   
     $class       = isset($params['class']) ? $params['class'] : null;
     $style       = isset($params['style']) ? $params['style'] : null;
@@ -20,26 +20,46 @@ function smarty_function_mediaitem($params, &$smarty)
     $onmousedown = isset($params['onmousedown']) ? $params['onmousedown'] : null;
 
 
-    //if ($data === false) {
-      //  $result = __('No media item found in this album', $dom);
-
-   // } else if($data['handler']) {
+		//manage override
+		if($width !== false){
+		$out_width = $width;			
+		}elseif($preview['width'] !== ''){
+		$out_width = $preview['width'];									
+		}else{			
+		//safe defs
+		$out_width = 300;						
+		}
+		if($height !== false){
+		$out_height = $height;				
+		}else if($preview['height'] !== ''){
+		$out_height = $preview['height'];			
+		}else {					
+		$out_height = 400;					
+		}		
+		if($richmedia !== false){
+		$out_richmedia = $richmedia;				
+		}else if($preview['richmedia'] !== ''){
+		$out_richmedia = $preview['richmedia'];			
+		}else {					
+		$out_richmedia = false;					
+		}		
    	
+		//echo '<pre>';		 						
+		//var_dump($data);
+		//exit(0);	
+		
     	$handlername = $data['handler'];
 		$handlername = ucfirst($handlername);
-		$h['handler'] = $handlername;
-		
-		
-        $handlerManager = new Mediasharex_Manager_MediaHandler(null,$h);
-		
+		$h['handler'] = $handlername;		
+        $handlerManager = new Mediasharex_Manager_MediaHandler(null,$h);		
         if ($handlerManager->exist()) {
         $handlerManager->loadfile();
         $handler = $handlerManager->loadHandler();
-		$handler_html = $handler->getDisplay($data, $preview ,$width ,$height ,$richMedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));
+		$handler_html = $handler->getDisplay($data, $out_width ,$out_height ,$richmedia,$url ,array('title' => $title, 'onclick' => $onclick, 'onmousedown' => $onmousedown, 'class' => $class, 'style' => $style));
 		}
 
-		$folder_height = $height + 60;
-		$folder_width = $height + 20;
+		$folder_height = $out_height;
+		$folder_width = $out_width;
 		
 		//handler is dealing with url because of rich media
         if (!$handler_html) {
@@ -49,12 +69,7 @@ function smarty_function_mediaitem($params, &$smarty)
 		</a>
 		'; 			
 		}		
-		$out  = '
-		<div class="mediasharex_display_plugin_media">				
-		<div class="mediasharex_display_plugin_media_thumbnail"  style="width:'.$folder_width.'px;height:'.$height.'px;">
-		'.$handler_html.'		
-		</div>
-		</div>';
+		$out  =  $handler_html;
 		
 		return $out;
 
