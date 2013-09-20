@@ -52,7 +52,7 @@ class Mediasharex_Manager_Preview
         return $this->_preview;
     }
 	
-	private function _getFromDB($id)
+	private function _getFromDB($name)
 	{
         if (!isset($name) || empty($name)) {
             return LogUtil::registerArgsError();

@@ -3,13 +3,13 @@
 {modulelinks links=$settingslinks id='listid' class='z-menulinks' itemclass='z-ml-item' first='z-ml-first' last='z-ml-last'}
 
 <div class="z-admin-content-pagetitle">
-<h3><i class="mediasharex-icon-tablet"></i> {gt text="Display settings"}</h3>
+<h3><i class="mediasharex-icon-tablet"> </i> {gt text="Display settings"}</h3>
 </div>
 
 
 <div id="mediasharex_mainsettings" class="z-clearfix">
-      <div id="mediasharex_mainsettings_form" class="z-w60 z-formrow z-floatleft"> 
-        <form id="mediasharex_mainsettings_form" class="z-form" action="{modurl modname="mediasharex" type="admin" func="settings_display_update"}" method="post" enctype="application/x-www-form-urlencoded">
+      <div id="mediasharex_mainsettings_form_container" class="z-w60 z-formrow z-floatleft"> 
+        <form id="mediasharex_mainsettings_form" class="z-form" action="{modurl modname='mediasharex' type='admin' func='settings_display_update'}" method="post" enctype="application/x-www-form-urlencoded">
             <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />           
             <fieldset> 
              <legend>{gt text="Previews"}</legend>
@@ -27,7 +27,7 @@
              {if $previews}
              {foreach from=$previews key=previewname item=preview}
              <div class="z-clearer">
-               <div  class="z-w07 z-floatleft" ><i class="{$preview.class}"></i></div>
+               <div  class="z-w07 z-floatleft" ><i class="{$preview.class}"> </i></div>
                <input class="z-w10" id="mediasharex_preview_{$previewname}" name="previews[{$previewname}][name]"       type="text"      value="{$previewname}" />                        
                <input class="z-w05" id="mediasharex_preview_{$previewname}" name="previews[{$previewname}][width]"      type="text"      value="{$preview.width}"/>                          
                <input class="z-w05" id="mediasharex_preview_{$previewname}" name="previews[{$previewname}][height]"     type="text"      value="{$preview.height}" />                        
@@ -38,9 +38,9 @@
               </div>
             {/foreach}
             {/if}
-            <p><i class="mediasharex-icon-plus-sign"></i>  {gt text="Add new preview"}</p>
+            <p><i class="mediasharex-icon-plus-sign"> </i>  {gt text="Add new preview"}</p>
              <div>
-               <div  class="z-w07 z-floatleft" ><i class="mediasharex-icon-file-alt"></i></div>             
+               <div  class="z-w07 z-floatleft" ><i class="mediasharex-icon-file-alt"> </i></div>             
                <input class="z-w10" id="mediasharex_preview_new" name="new_preview[name]"       type="text"      value=""/>                        
                <input class="z-w05" id="mediasharex_preview_new" name="new_preview[width]"      type="text"      value=""/>                          
                <input class="z-w05" id="mediasharex_preview_new" name="new_preview[height]"     type="text"      value=""/>                        
@@ -52,13 +52,13 @@
                  
            
             <div class="z-formbuttons z-buttons">
-            <button type="submit"><i class="mediasharex-icon-redo"></i> {gt text='Update'}</button>
+            <button type="submit"><i class="mediasharex-icon-redo"> </i> {gt text='Update'}</button>
             </div>
         </form>
       </div>
-     <div id="mediasharex_mainsettings_info" class="z-w40 z-formrow z-floatright z-center"> 
-           {thumb image="modules/Mediasharex/images/settings/display.jpg" tag=true width=280 height=280 mode='inset' extension='png'}                          
-      </div>     
+      <div id="mediasharex_admin_documentation" class="z-formrow z-w35 z-floatright">
+      {$file_content}
+      </div>  
 </div>      
       
 {*zdebug*}

@@ -5,7 +5,7 @@
 <h3><i class="mediasharex-icon-folder"></i> {gt text="Media sources"}</h3>
 </div>
 <div class="z-informationmsg">
-<a href="{modurl modname='Mediasharex' type='admin' func='manager_reload_sources'}"> {icon type="regenerate" size="extrasmall"} {gt text="Reload sources"}</a> 
+<a href="{modurl modname='Mediasharex' type='admin' func='sandh_reload_sources'}"> {icon type="regenerate" size="extrasmall"} {gt text="Reload sources"}</a> 
 </div>
 
 <div id="mediasharex_managesources">
@@ -51,7 +51,7 @@
              {$item.active}  
             </td>
             <td>
-         <a href="{modurl modname='Mediasharex' type='admin' func='modify_source' id=$item.id}">{gt text="Edit"}</a> 
+         <a href="{modurl modname='Mediasharex' type='admin' func='sandh_modify_source' id=$item.id}">{gt text="Edit"}</a> 
             </td>
         </tr>
     {/foreach}

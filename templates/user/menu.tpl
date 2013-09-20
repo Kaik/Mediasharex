@@ -4,17 +4,17 @@
 
 <ul>
 <li id="mediasharex_title" class="mediasharex_menu_link">      
-<a  href="{modurl modname='Mediasharex' type='user' func='home'}" > <h1><i class="mediasharex-icon-picture icon-2x"></i> {gt text="Gallery"}</h1></a>
+<a  href="{modurl modname='Mediasharex' type='user' func='home'}" > <h1><i class="mediasharex-icon-picture"> </i> {gt text="Gallery"}</h1></a>
 </li>
 
 <li id="mediasharex_home_link" class="mediasharex_menu_link">  
-        <a  title="{gt text='Home'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='home'}"><i class="mediasharex-icon-star mediasharex-icon-home"></i> {gt text='Home'}</a>
+        <a  title="{gt text='Home'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='home'}"><i class="mediasharex-icon-home"></i> {gt text='Home'}</a>
 </li>  
 <li id="mediasharex_browse_link" class="mediasharex_menu_link">  
-        <a  title="{gt text='Browse'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='view'}"><i class="mediasharex-icon-star mediasharex-icon-eye-open"></i> {gt text='Browse'}</a>
+        <a  title="{gt text='Browse'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='view'}"><i class="mediasharex-icon-eye-open"></i> {gt text='Browse'}</a>
 </li> 
 <li id="mediasharex_explore_link" class="mediasharex_menu_link">  
-        <a  title="{gt text='Explore'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='display'}"><i class="mediasharex-icon-sitemap mediasharex-icon-large"></i> {gt text='Explore'}</a>
+        <a  title="{gt text='Explore'}" class="tip" href="{modurl modname='Mediasharex' type='user' func='display'}"><i class="mediasharex-icon-foldertree"></i> {gt text='Explore'}</a>
 </li> 
 
 

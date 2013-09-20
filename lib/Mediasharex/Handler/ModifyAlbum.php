@@ -10,19 +10,18 @@ class Mediasharex_Handler_ModifyAlbum extends Zikula_Form_AbstractHandler
          
     public function initialize(Zikula_Form_View $view)
     {
-
-
 		// Security check
-        if (!SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_COMMENT)) {
-            throw new Zikula_Exception_Forbidden(LogUtil::getErrorMsgPermission());
-        }
+		if(!Mediasharex_Util_Access::checkPerms(ACCESS_COMMENT, '::')){
+       	throw new Zikula_Exception_Forbidden(LogUtil::getErrorMsgPermission());			
+		}
      
         $id   = FormUtil::getPassedValue('id', isset($args['id']) ? $args['id'] : null, 'GETPOST');
         $redirect   = FormUtil::getPassedValue('redirect', isset($args['redirect']) ? $args['redirect'] : null, 'GETPOST');		         
 		$this->id = $id;   		              
 
-		$access = Mediasharex_Util_Access::getAccessSelect();
-		$view->assign('access_select',$access);		
+		$access = new Mediasharex_Util_Access();	
+		
+		$view->assign('access_select',$access->getAccessSelect());		
 		
 		$themes = Mediasharex_Util_AlbumThemes::getThemesSelect();
 		$view->assign('themes_select',$themes);

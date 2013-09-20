@@ -9,12 +9,27 @@
 #mediasharex_info {	
 
 }
+/*
+ * 
+ * Admin Documentation pages
+ * 
+ */
+#mediasharex_admin_documentation{
+	font-size: 0.9em;
+	background-color: #FAFBFC;
+	border: 1px solid #E0E8EF;
+	color: #505050;
+	line-height: 1.5em;
+	padding: 1em;
+	margin-bottom: 1em;	
+}
 
 /*
  * 
  * Admin Docs
  * 
  */
+
 
 #mediasharex_admin_info_docs{
 
@@ -33,7 +48,13 @@ background: #fff;
 }
 
 #mediasharex_admin_info_docs_directory_tree{
-
+	font-size: 0.9em;
+	background-color: #FAFBFC;
+	border: 1px solid #E0E8EF;
+	color: #505050;
+	line-height: 1.5em;
+	padding: 1em;
+	margin-bottom: 1em;	
 }
 
 #mediasharex_admin_info_docs_directory_tree ul{
@@ -70,4 +91,30 @@ list-style:none;
 	position:absolute;
 	z-index:10;
 	color:#fff;	
+}
+
+
+/*
+ * 
+ * Plugins
+ * 
+*/
+
+#mediasharex-plugin-albumtree ul{
+ list-style: none !important;	
+}
+
+ul.mediasharex-plugin-albumtree {
+ list-style: none;
+ 	font-size: 0.9em;
+	background-color: #FAFBFC;
+	border: 1px solid #E0E8EF;
+	color: #505050;
+	line-height: 1.5em;
+	padding: 1em;
+	margin-bottom: 1em;		
+}
+
+ul.mediasharex-plugin-albumtree li{
+
 }

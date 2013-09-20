@@ -29,11 +29,12 @@ class Mediasharex_MediaSources_AnyFileUpload
      	$settings['maxLength'] = '100';
 		//$settings['width'] = '';
 		//$settings['height'] = '';
-     	//$settings['inputName'] = '';
+     	$settings['inputName'] = $this->getName().'[]';
      	//$settings['readOnly'] = '';
      	$settings['cssClass'] = 'mediasharex_source_upload_field';
-    	//$settings['dataField'] = ;
-     	//$settings['dataBased'] = ;
+    	//$settings['dataField'] = 'uploaded_files';
+    	$settings['multiple'] = 'multiple';    	
+     	//$settings['dataBased'] = 'true';
      	//$settings['group'] = ;
      	//$settings['isValid'] = ;
      	//$settings['mandatory'] = ;
@@ -44,14 +45,40 @@ class Mediasharex_MediaSources_AnyFileUpload
 	}	
 	public function getPlugin($view)
 	{
-		$plugin = $view->registerPlugin('Zikula_Form_Plugin_UploadInput', $this->getPluginSettings());						
+		$plugin = $view->registerPlugin('Mediasharex_Plugin_UploadInput', $this->getPluginSettings());						
 		return $plugin;		
 	}	
 
-	public function getPostData($view)
+	public function getPostData($uploaded_files)
 	{
-			
-	return $data;	  	
+					
+	//reorder 			
+	   foreach( $uploaded_files as $key => $all ){
+	        foreach( $all as $i => $val ){
+	            $pre_media[$i][$key] = $val;    
+	        }    
+	    }
+	   
+	   $media = array();
+	//clear 
+	//return general info so
+	//error other than 4 
+	//title
+	//description
+	//thumbnail
+	//fileref
+	//previewname
+	//mimetype
+	//hanler
+	//size  
+	   foreach( $pre_media as $key => $mediaitem ){
+	   			if($mediaitem['error'] != 4){
+	            $media[$key] = $mediaitem;    	            			
+				}
+	   }	   
+	   
+	   					
+	return $media;	  	
  	}
 	
 

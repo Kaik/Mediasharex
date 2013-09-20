@@ -7,7 +7,7 @@
 
 /*Album
  */
-.mediasharex_preview_album_thumbnail-large {
+.mediasharex_preview_album_thumbnail {
 margin-bottom:20px;
 width:30%;
 height:380px;
@@ -15,35 +15,34 @@ overflow:hidden;
 float:left;
 }
 
-.mediasharex_preview_album_thumbnail-large_image_box{
+.mediasharex_preview_album_thumbnail_image_box{
  float:left;
  position:relative;	
 }
 
-.mediasharex_preview_album_thumbnail-large_image_icon{
+.mediasharex_preview_album_thumbnail_image_icon{
  position:absolute;
  top:0;
  left:0;	
 }
 
-.mediasharex_preview_album_thumbnail-large_image{
+.mediasharex_preview_album_thumbnail_image{
  position:absolute;
  top:55px;
  left:0;	
 }
 
-.mediasharex_preview_album_thumbnail-large_right{
+.mediasharex_preview_album_thumbnail_right{
 
 }
 /*Media
  */
-.mediasharex_preview_media_thumbnail-large {
+.mediasharex_preview_media_thumbnail {
 
 	
 }
-
-.mediasharex_preview_media_thumbnail-large_image {
+.mediasharex_preview_media_thumbnail_image {
 }
 
-.mediasharex_preview_media_thumbnail-large_title {	
+.mediasharex_preview_media_thumbnail_title {	
 }

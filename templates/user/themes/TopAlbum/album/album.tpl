@@ -35,7 +35,7 @@
 </div>
  
 {* Include previews. *}
-{include file="user/previews.tpl"}
+{include file="user/themes/TopAlbum/previews.tpl"}
 
 <div id="mediasharex_display_album_media" class="z-clearer z-clearfix">       
   {if $mediaitems|@count >0}

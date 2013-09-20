@@ -35,14 +35,34 @@ class Mediasharex_Manager_Albums
 	{	
         if ((isset($author) && $author != -1) ? $author : false ) {                  
         $author = DataUtil::formatForStore($author);
-        $this->whereclause[] = $this->columns['author']."= $author";
+        $this->whereclause[] = "tbl.".$this->columns['author']."= $author";
         }	
     }
 	public function setParentalbum($parentalbum = -1)
 	{	                 
         $parentalbum = DataUtil::formatForStore($parentalbum);
         $this->whereclause[] = "tbl.".$this->columns['parentalbum']."= $parentalbum";	
-    }		
+    }
+	
+	public function setNestedSetLevel($nestedSetLevel = -1)
+	{	                 
+        $nestedSetLevel = DataUtil::formatForStore($nestedSetLevel);
+        $this->whereclause[] = "tbl.".$this->columns['nestedsetlevel']."= $nestedSetLevel";	
+    }
+	
+	public function setNestedSetLeft($nestedSetLeft = -1)
+	{	                 
+        $nestedSetLeft = DataUtil::formatForStore($nestedSetLeft);
+        $this->whereclause[] = "tbl.".$this->columns['nestedsetleft']."= $nestedSetLeft";	
+    }
+	
+	public function setNestedSetRight($nestedSetRight = -1)
+	{	                 
+        $nestedSetRight = DataUtil::formatForStore($nestedSetRight);
+        $this->whereclause[] = "tbl.".$this->columns['nestedsetright']."= $nestedSetRight";	
+    }			
+	
+			
 	public function setAccesslevel($accesslevel = -1)
 	{	                 
         $accesslevel = DataUtil::formatForStore($accesslevel);

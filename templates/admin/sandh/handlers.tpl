@@ -7,7 +7,7 @@
 {if $files|@count neq $mediaHandlers|@count}
 <div class="z-informationmsg">
 {gt text="Click here to reload handlers from directory"}
-<a href="{modurl modname='Mediasharex' type='admin' func='manager_reload_handlers'}"> {icon type="regenerate" size="extrasmall"} {gt text="Reload handlers"}</a> 
+<a href="{modurl modname='Mediasharex' type='admin' func='sandh_reload_handlers'}"> {icon type="regenerate" size="extrasmall"} {gt text="Reload handlers"}</a> 
 </div>
 {else}
 <div class="z-statusmsg">
@@ -40,7 +40,7 @@
              {$item.handler}   
             </td>
             <td>
-            <a href="{modurl modname='Mediasharex' type='admin' func='modify_handler' id=$item.id}">{gt text="Edit"}</a> 
+            <a href="{modurl modname='Mediasharex' type='admin' func='sandh_modify_handler' name=$item.handler}">{gt text="Edit"}</a> 
             </td>
         </tr>
     {/foreach}

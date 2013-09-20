@@ -35,33 +35,33 @@ class Mediasharex_Manager_MediaItems
 	{	
         if ((isset($author) && $author != -1) ? $author : false ) {                  
         $author = DataUtil::formatForStore($author);
-        $this->whereclause[] = $this->columns['author']."= $author";
+        $this->whereclause[] = "tbl.".$this->columns['author']."= $author";
         }	
     }
 	public function setParentalbum($parentalbum = -1)
 	{	                 
         $parentalbum = DataUtil::formatForStore($parentalbum);
-        $this->whereclause[] = $this->columns['parentalbum']."= $parentalbum";	
+        $this->whereclause[] = "tbl.".$this->columns['parentalbum']."= $parentalbum";	
     }		
 	public function setAccesslevel($accesslevel = -1)
 	{	                 
         $accesslevel = DataUtil::formatForStore($accesslevel);
-        $this->whereclause[] = $this->columns['accesslevel']."= $accesslevel";	
+        $this->whereclause[] = "tbl.".$this->columns['accesslevel']."= $accesslevel";	
     }
 	public function setViewkey($viewkey = -1)
 	{	                 
         $viewkey = DataUtil::formatForStore($viewkey);
-        $this->whereclause[] = $this->columns['viewkey']."= $viewkey";	
+        $this->whereclause[] = "tbl.".$this->columns['viewkey']."= $viewkey";	
     }
 	public function setTemplate($template = -1)
 	{	                 
         $template = DataUtil::formatForStore($template);
-        $this->whereclause[] = $this->columns['template']."= $template";	
+        $this->whereclause[] = "tbl.".$this->columns['template']."= $template";	
     }
 	public function setReferenceid($referenceid = -1)
 	{	                 
         $referenceid = DataUtil::formatForStore($referenceid);
-        $this->whereclause[] = $this->columns['referenceid']."= $referenceid";	
+        $this->whereclause[] = "tbl.".$this->columns['referenceid']."= $referenceid";	
     }
 	public function setOrderby($sortby = 'id',$sortorder = 'ASC')
 	{
@@ -129,7 +129,14 @@ class Mediasharex_Manager_MediaItems
        'compare_field_table' => 'original',
        'compare_field_join' => 'id',
        );  
-	  
+
+	  $join[] = array(
+	   'join_table' => 'mediasharex_albums',
+       'join_field' => array('title'),
+       'object_field_name' => array('album_title'),
+       'compare_field_table' => 'parentalbum',
+       'compare_field_join' => 'id',
+       );	  
 	  	    	
       $ObjArray = DBUtil::selectExpandedObjectArray($this->table, $join ,$this->where, $this->orderby, $this->page, $this->items,'', $this->permFilter, $this->catFilter);	
 	  return $ObjArray;	

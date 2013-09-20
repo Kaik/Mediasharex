@@ -12,5 +12,11 @@
 {/if}
 {/if}
 {/foreach}
+
+
+<a href="{modurl modname=Mediasharex type=$type func=modify_album id=$album.id}"><i class="mediasharex-icon-edit"> </i></a> 
+    
+
+
 </div>
 

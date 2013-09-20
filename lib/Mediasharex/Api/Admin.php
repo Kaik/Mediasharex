@@ -299,9 +299,11 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'settings_media'), 'text' => $this->__('Media'), 'class' => 'z-icon-es-displa');
         }
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+            $links[] = array('url' => ModUtil::url($this->name, 'admin', 'settings_access'), 'text' => $this->__('Access'), 'class' => 'z-icon-es-displa');
+        }		
+		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'settings_storage'), 'text' => $this->__('Storage'), 'class' => 'z-icon-es-displa');
-        }
-        
+        }       
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'settings_handlers'), 'text' => $this->__('Handlers'), 'class' => 'z-icon-es-displa');
         }
@@ -341,10 +343,10 @@ class Mediasharex_Api_Admin extends Zikula_AbstractApi
 		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
             $links[] = array('url' => ModUtil::url($this->name, 'admin', 'manager_previews'), 'text' => $this->__('Previews'), 'class' => 'z-icon-es-displa');
         }
-		
-		if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
-            $links[] = array('url' => ModUtil::url($this->name, 'admin', 'manager_invitations'), 'text' => $this->__('Invitations'), 'class' => 'z-icon-es-displa');
-        }
+		//unused yet
+		//if (SecurityUtil::checkPermission('Mediasharex::', '::', ACCESS_ADMIN)) {
+          //  $links[] = array('url' => ModUtil::url($this->name, 'admin', 'manager_invitations'), 'text' => $this->__('Invitations'), 'class' => 'z-icon-es-displa');
+       // }
                 
 			
         return $links;

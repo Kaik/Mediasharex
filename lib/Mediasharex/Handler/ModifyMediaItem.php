@@ -44,6 +44,41 @@ class Mediasharex_Handler_ModifyMediaItem extends Zikula_Form_AbstractHandler
   
       return true;
 
+
+
+		/*
+		$view->assign('isPostBack', false);
+				
+		if($view->isPostBack()){
+	        //if(!$view->isValid){
+				
+			$view->assign('isPostBack', true);					
+			
+			//$sdata = array();				
+			foreach ($sources  as $key => $source) {			
+			$sourceManager = new Mediasharex_Manager_MediaSource(null,$source);	
+			$sdata[$source['name']] = $sourceManager->readPost($view);
+			///
+			if($sdata[$source['name']]['pre_item']){
+			$item = array_merge($item,$sdata[$source['name']]['pre_item']);
+				$titlePlugin = $view->getPluginById('title');									
+				$titlePlugin->text = $item['title'];				
+			    $titlePlugin->decode($view);				
+			}
+			
+			}
+       		//$view->assign('_item', $item);			
+			//$sdata = $this->view->getValues();
+       		$view->assign('sdata', $sdata);			
+				
+				
+						        					
+			//var_dump($sdata);
+			//exit(0);				
+			//}
+		}		
+		*/
+		
     }
 
 

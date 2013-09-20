@@ -28,14 +28,17 @@
 
 {* Include base js css etc. *}
 {include file="user/menu.tpl"}
+
+{* Include previews. *}
+{include file="user/themes/`$album.template`/previews.tpl"}
+
+   {breadcrumbs path=$bread crumbsId="mediasharex-plugin-breadcrumbs" crumbsClass="mediasharex-plugin-breadcrumbs" }  
+
 <div id="mediasharex_display_album" >
  <h1>{$album.title}</h1>
 <div id="mediasharex_display_album_description" class="">
     {$album.description}
 </div>
- 
-{* Include previews. *}
-{include file="user/themes/`$album.template`/previews.tpl"}
 
 <div id="mediasharex_display_album_media" class="z-clearer z-clearfix">       
   {if $mediaitems|@count >0}
@@ -59,5 +62,5 @@
 
 </div>
 </div>
-{*zdebug*}
+{zdebug}
 

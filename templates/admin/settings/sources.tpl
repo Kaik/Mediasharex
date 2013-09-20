@@ -8,7 +8,7 @@
 
 
 <div id="mediasharex_mainsettings" class="z-clearfix">
-      <div id="mediasharex_mainsettings_form" class="z-w40 z-formrow z-floatleft"> 
+      <div id="mediasharex_mainsettings_form" class="z-w60 z-formrow z-floatleft"> 
     <form id="mediasharex_mainsettings_form" class="z-form" action="{modurl modname="mediasharex" type="admin" func="updatemainsettings"}" method="post" enctype="application/x-www-form-urlencoded">
 
             <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />           
@@ -21,8 +21,8 @@
             </div>
         </form>
       </div>
-     <div id="mediasharex_mainsettings_info" class="z-w60 z-formrow z-floatright z-center"> 
-           {thumb image="modules/Mediasharex/images/settings/sources.jpg" tag=true width=480 height=380 mode='inset' extension='png'}                          
+      <div class="mediasharex_admin_settings_status_doc z-formrow z-w35 z-floatright">
+      {$file_content}
       </div>
 </div>      
 {adminfooter}

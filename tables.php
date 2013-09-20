@@ -22,7 +22,7 @@ function Mediasharex_tables()
         'summary'        => 'summary',
         'template'       => 'template',
         'parentalbum'  	 => 'parentalbum',
-        'accesslevel'         => 'accesslevel',
+        'accesslevel'    => 'accesslevel',
         'viewkey'        => 'viewkey',
         'mainmedia'      => 'mainmedia',
         'thumbnailsize'  => 'thumbnailsize',
@@ -46,7 +46,7 @@ function Mediasharex_tables()
         'summary'        => "X NOTNULL DEFAULT ''",
         'template'       => "C(255) NOTNULL DEFAULT 'slideshow'",
         'parentalbum'	 => 'I',
-        'access'         => 'I1 NOTNULL DEFAULT 0',
+        'accesslevel'    => 'I1 NOTNULL DEFAULT 0',
         'viewkey'        => 'C(32) NOTNULL',
         'mainmedia'      => 'I NOTNULL DEFAULT 0',
         'thumbnailsize'  => 'I NOTNULL',
@@ -182,7 +182,7 @@ function Mediasharex_tables()
       'title'         => "C(50) NOTNULL DEFAULT ''",
       'active'        => 'I1 NOTNULL DEFAULT 1'
     );
-
+	
     // Sources
     $dbtable['mediasharex_sources'] = DBUtil::getLimitedTablename('mediasharex_sources');
 
@@ -267,7 +267,7 @@ function Mediasharex_tables()
     );
 	
 
-	$settings = ModUtil::getVar('Mediasharex','enableimporttables',false);
+	$settings = ModUtil::getVar('Mediasharex','import_enableImportTables',false);
 	//import old mediashare tables
 	if ($settings){
 	$importtables = ModUtil::apiFunc('Mediasharex', 'import', 'include_import_tables');

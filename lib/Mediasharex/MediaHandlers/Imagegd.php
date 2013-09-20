@@ -8,7 +8,29 @@ class Mediasharex_MediaHandlers_Imagegd
     public function getTitle()
     {       
     return 'ImageGD';//$this->__('Mediashare Youtube Handler');
-    }	
+    }
+	
+	public function getInfo()
+    {       
+    return array('author' => 'Kaik',
+                 'version' => '1.0.0',
+                 'name' => $this->getTitle(),
+                 'mimeTypes' => $this->getMimetype(),
+                 'default_settings' => $this->getDefaultSettings()                 
+				 );  	
+ 	
+    }
+	
+    public function getDefaultSettings()
+    {       
+    return array('upload_max_size' 	=> '2M',
+                 'Upload_max_files' => '10',
+                 'image_engine' 	=> 'imagick',
+                 'unusedOption' 	=> 'unusedValue' 
+				 );  	
+ 	
+    }		
+		
  	public function getMimetype()
  	{
 	return array(
@@ -28,15 +50,19 @@ class Mediasharex_MediaHandlers_Imagegd
                   'filetype' => 'gif',
                   'foundmimetype' => 'image/gif',
                   'foundfiletype' => 'gif'));  	
- 	}	
+ 	}
+	
+	// to remove	
  	public function getFiletype()
  	{
 	return 'you'; 	
  	}
+	// to remove	
  	public function getFoundmimetype()
  	{
 	return 'video/youtube'; 	
  	}
+	// to remove
  	public function getFoundfiletype()
  	{
 	return 'you'; 	
@@ -56,7 +82,7 @@ class Mediasharex_MediaHandlers_Imagegd
 		$fileref = $data['fileref'];	
 		
 		
-		$MediaDir = ModUtil::getVar('Mediasharex','mediaDirName',false);
+		$MediaDir = ModUtil::getVar('Mediasharex','general_mediaDirName',false);
 
 		$filepath = $MediaDir.'/'.$fileref;   // /blank_avatar.png;//
 
